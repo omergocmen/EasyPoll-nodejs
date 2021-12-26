@@ -1,0 +1,43 @@
+<%- include('./partials/navbar.ejs') %> 
+
+<section class="tablee" style="width: 60%; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 150px auto;">
+    <form method="post">
+    <table class="table">
+        <thead>
+          
+        
+
+              <tr>
+                <% dates.forEach(dateElement => { %>
+                    <th scope="col"><%-  dateElement.date %> </th>
+                  <% votes.forEach(voteElement => { %>
+                          <% if(voteElement.dateId==dateElement.id && voteElement.vote==true){ %>
+                            <td scope="col">V</td>
+                            <% } else if(voteElement.dateId==dateElement.id && voteElement.vote==false) { %>
+                            <td scope="col">X</td>
+                          <%  } %>
+                  <% }) %>
+                  <td><input name="votes" value=<%- dateElement.date %>  class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                </tr>
+                <% }) %>
+            
+            
+            
+            
+
+            <tr>
+                <% dates.forEach(dateElement => { %>
+                  <% }) %>
+                <td><button type="submit" class="btn btn-success">Oyla</button></td>
+            </tr>
+          
+        </thead>
+        <tbody>
+
+
+        </tbody>
+      </table>
+    </form>
+</section>
+
+  <%- include('./partials/footer.ejs') %> 

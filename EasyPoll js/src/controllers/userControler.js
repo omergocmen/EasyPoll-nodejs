@@ -26,8 +26,13 @@ module.exports.getAllUsers=async function(req,res)
 }
 module.exports.getUser=async function(req,res,next)
 {
-    const user=await User.findOne({_id:req.params.id});
-    res.render('user',{user});
+    try {
+        const user=await User.findOne({_id:req.params.id});
+        res.render('user',{user});
+    } catch (error) {
+        next();
+    }
+
 }
 
 

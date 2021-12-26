@@ -1,0 +1,23 @@
+<%- include('./partials/navbar.ejs') %> 
+        <section class="team-clean" style="margin: 50px 0;">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Yazarlar </h2>
+                    <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+                </div>
+                <div class="row people" style="justify-content: space-between;">
+                    <% users.forEach(user => { %>
+                        <div class="shadow col-md-6 col-lg-3 item " style="margin: 10px;"><img class="rounded-circle" src="https://source.unsplash.com/random/400x400" />
+                            <h3 class="name"><a href=" http://localhost:3000/home/users/<%- user._id %>" style="text-decoration: none;"><%- user.firstName %>  <%- user.lastName %></a></h3>
+                            <p class="title"><%- user.email %></p>
+                            <p class="description"><%- user.biography %> </p>
+                            <p><span><%- user.degree %> </span> <b><%- user.business %> </b> </p>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+        <div style="width: 80%; margin: auto;">
+            <%- include('./partials/pagination.ejs') %> 
+        </div>
+<%- include('./partials/footer.ejs') %> 

@@ -1,0 +1,36 @@
+
+
+<header>
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-search" style="margin-bottom: -90px;">
+        <div class="container">
+            <a class="navbar-brand" href="/home"><img src="/assets/img/EASYPOLL.png" style="height: 100px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" style="border-style: none;"><span class="visually-hidden">Menü</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav" style="margin: auto;">
+                    <li class="nav-item myitem " style="color: #2b1d10;"><a class="nav-link" href="#createpoll" style="color: rgb(0,0,0);">Anket Oluştur</a></li>
+                    <li class="nav-item myitem "><a class="nav-link" href="#features" style="color: rgb(0,0,0);">Özellikler</a></li>
+                    <li class="nav-item myitem "><a class="nav-link" href="#whoami" style="color: rgb(0,0,0);">Hakkımızda</a></li>
+                    <li class="nav-item myitem "><a class="nav-link" href="#contact" style="color: rgb(0,0,0);">İletişim</a></li>
+                
+                <% if(auth!="enter"){ %>
+                    </ul>
+                            <div class="ms-auto"><a class="btn btn-light action-button" role="button" data-bss-hover-animate="tada" href="http://localhost:3000/home/users/logIn" style="padding: 8px 40px;padding-right: 50px;margin-right: 10px;background: #ff7b01;color: #000000;font-weight: bold;" algin="center">Giriş Yap</a>
+                                <a class="btn btn-light mx-auto action-button" role="button" data-bss-hover-animate="tada" href="http://localhost:3000/home/users/signIn" style="padding: 8px 40px;background: #ff7b01;font-weight: bold;text-align: center;" a="">Kayıt Ol</a></div>
+                        <% } else { %>
+                            <li class="nav-item  myitem dropdown" >
+                                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Seçenekler</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="#">Profil</a></li>
+                                  <li><a class="dropdown-item" href="#">Diğer İşlemler</a></li>
+                                  <li><a class="dropdown-item" style="margin-left:auto" href="http://localhost:3000/home/users/logIn?exit=true">Çıkış</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                    <%  } %>
+            </div>
+        </div>
+    </nav>
+</header>
+
+

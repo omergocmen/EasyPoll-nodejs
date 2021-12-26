@@ -1,0 +1,28 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+    <div class="container"><a class="navbar-brand" href="http://localhost:3000/home"><img src="/assets/img/EASYPOLL.png" style="height:100px;" alt=""></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav me-auto" style="margin-left: 100px;">
+                <li class="nav-item"><a class="nav-link" href="#">Anket oluştur</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Özellikler</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Hakkımızda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">İletişim</a></li>
+                <% if(auth!="enter"){ %>
+                </ul><span class="navbar-text actions"> 
+                    <a class="btn btn-outline-success" style="border-radius: 10%;" href="http://localhost:3000/home/users/signIn">Kayıt ol</a>
+                    <a class="btn btn-outline-success" style="border-radius: 10%;" role="button" href="http://localhost:3000/home/users/logIn">Giriş yap</a></span>
+                        <% } else { %>
+                            <div class="dropdown" style="margin-left: 400px;">
+                                <button class="btn btn-success dropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                  <li><a class="dropdown-item" href="#">Profil ayarları</a></li>
+                                  <li><a class="dropdown-item" href="#">Diğer işlemler</a></li>
+                                  <li><a class="dropdown-item"  href="http://localhost:3000/home/users/logIn?exit=true">Çıkış yap</a></li>
+                                </ul>
+                              </div>
+                            <%  } %>
+                        
+        </div>
+    </div>
+</nav>

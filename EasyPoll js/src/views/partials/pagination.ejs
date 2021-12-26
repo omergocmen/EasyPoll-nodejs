@@ -1,0 +1,22 @@
+
+<nav aria-label="..." style="width: 90%; margin: auto;">
+  <ul class="pagination">
+    <% if (pageOptions.page!=0) { %>
+      <li class="page-item">
+        <a class="page-link" href="http://localhost:3000/home/<%- pageOptions.url %>?page=<%- pageOptions.page-1 %>&limit=<%- pageOptions.limit %>&search=<%- pageOptions.value %>">Önceki</a>
+      </li>
+    <% } %>
+    <% for( let i = 0; i <pageOptions.index; i++ ) { %>
+      <% if (pageOptions.page==(i)) { %>
+        <li class="page-item active"><a class="page-link" href="http://localhost:3000/home/<%- pageOptions.url %>?page=<%- (i) %>&limit=<%- pageOptions.limit %>&search=<%- pageOptions.value %> "><%- (i+1) %> </a></li>
+        <% continue %> 
+        <% } %>
+        <li class="page-item "><a class="page-link" href="http://localhost:3000/home/<%- pageOptions.url %>?page=<%- (i) %>&limit=<%- pageOptions.limit %>&search=<%- pageOptions.value %>"><%- (i+1) %> </a></li>
+      <% } %>
+    <% if (pageOptions.page<(pageOptions.index-1)) { %>
+      <li class="page-item">
+        <a class="page-link" href="http://localhost:3000/home/<%- pageOptions.url %>?page=<%- pageOptions.page+1 %>&limit=<%- pageOptions.limit %>&search=<%- pageOptions.value %>">Sonraki</a>
+      </li>
+    <% } %>
+  </ul>
+</nav>

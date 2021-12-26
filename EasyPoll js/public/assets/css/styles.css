@@ -1,0 +1,17 @@
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.column-custom {
+  padding: 1rem 5rem;
+}
+.navbar .navbar-nav .myitem
+{
+  margin: 0 10px;
+}
+
+
+#btn-clr{
+  background-color: #FF7B01;
+}

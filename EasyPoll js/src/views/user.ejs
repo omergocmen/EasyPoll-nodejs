@@ -1,0 +1,35 @@
+<%- include('./partials/navbar.ejs') %> 
+
+<section class="article-clean">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                <div class="intro">
+                    <h1 class="text-center"><%- user.firstName%>  <%- user.lastName %> </h1>
+                    <p class="text-center"><a href="#" style="text-decoration: none;"><%- user.email %> </a><span class="date"><%- user.createdAt %>  </span></p>
+                </div>
+                <div class="text">
+                    <figure class="figure d-block"><img class="figure-img" style="border-radius: 100%;" src="https://source.unsplash.com/random/600x400">
+                        <figcaption class="figure-caption">Altyazı</figcaption>
+                    </figure>
+                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    <ul> 
+                        <h4>Öne çıkan makaleler</h4>
+                        <li>
+                            Kompozit Malzemeler
+                        </li>
+                        <li>
+                            Binary Search
+                        </li>
+                        <li>
+                            Covid-19 ve Deri
+                        </li>
+                    </ul>
+                    <hr style="margin-bottom: 100px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<%- include('./partials/footer.ejs') %> 

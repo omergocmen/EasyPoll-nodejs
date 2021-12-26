@@ -1,0 +1,31 @@
+<%- include('./partials/navbar.ejs') %>  
+<section class="register-photo signIn" style="margin-bottom: 80px;" >
+    <div class="form-container" style="margin-top: 120px;">
+        <div class="image-holder"></div>
+        <form method="post" action="/home/users/signIn">
+            <h2 class="text-center"><strong>Kayıt ol</strong></h2>
+            <div class="mb-3"><input value="<% if (data && data.firstName!="") { %><%- data.firstName %><% } %>"  type="text" class="form-control" name="firstName" placeholder="Ad" /></div>
+            <div class="mb-3"><input value="<% if (data && data.lastName!="") { %><%- data.lastName %><% } %>"  type="text" class="form-control" name="lastName" placeholder="Soyad" /></div>
+            <div class="mb-3"><input value="<% if (data && data.email!="") { %><%- data.email %><% } %>"  type="email" class="form-control" name="email" placeholder="Email" /></div>
+            <div class="mb-3"><input value="<% if (data && data.password!="") { %><%- data.password %><% } %>"  type="password" class="form-control" name="password" placeholder="Şifre" /></div>
+            <div class="mb-3"><input value="<% if (data && data.repeatPassword!="") { %><%- data.repeatPassword %><% } %>"  type="password" class="form-control" name="repeatPassword" placeholder="Şifre (tekrar)" /></div>
+            <% message.forEach(element => { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%- element %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+            <% }) %>
+            <div class="mb-3">
+                <div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" />Lisans sözleşmesini kabul ediyorum.</label></div>
+            </div>
+            <div class="mb-3"><button class="btn btn-primary  d-block w-100" type="submit">Kayıt ol</button></div><a class="already" href="http://localhost:3000/home/users/logIn">Zaten kayıtlı mısın ?<b style="margin-left: 25px;">giriş yap</b>.</a>
+        </form>
+    </div>
+</section>
+<%- include('./partials/footer.ejs') %>  
+
+
+<form class="d-flex" method="post" action="/home/articles/search" style="margin-left:140px;" >
+    <input id="search" name="search" class="form-control me-2" type="text" placeholder="Makale Ara">
+    <button  class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+</form>

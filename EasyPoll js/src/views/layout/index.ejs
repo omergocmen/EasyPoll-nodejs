@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/assets/css/Article-List.css">
     <link rel="stylesheet" href="/assets/css/Registration-Form-with-Photo.css">
     <link rel="stylesheet" href="/assets/css/calendar.css">
-  
+    <link rel="stylesheet" href="/assets/css/step.css">
 </head>
 <body>
     <%- body %> 
@@ -105,13 +105,13 @@ return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year:
       list.forEach(element => {
         
         cards.innerHTML+=`
-  <div class="card mb-2 mt-2 " style="min-width: 160px !important; width:100% !important; border: 0.5px solid #FF7B01; margin-bottom: 30px !important; ">
+  <div class="card mb-2 mt-2 " style="min-width: 160px !important; width:98% !important; border: 0.5px solid #FF7B01; margin-bottom: 30px !important; ">
      <div class="card-body">
         
-         <h3  class="card-title">${getDayName(element, "tr")}<i class="fas fa-trash" style="margin-left:25px"></i></h3>
+         <h3  class="card-title">${getDayName(element, "tr")}<i class="fas fa-trash" style="margin-left:25px "></i></h3>
          <input name="date" style="visibility:hidden";  id="inputMDEx1" value=${getDayName(element, "tr")} class="form-control ">   
          <div class="md-form">
-            <input name="beginTime" type="time" id="inputMDEx1" class="form-control">
+            <input name="beginTime" type="time" id="inputMDEx1"class="form-control">
             <label for="inputMDEx1">Başlangıç saati</label>
         
          

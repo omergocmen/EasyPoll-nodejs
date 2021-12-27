@@ -1,6 +1,31 @@
 
                  <%- include('./partials/navbar.ejs') %>                   
                 <section class="dateSection shadow" style="width: 60%; min-width: 800px; margin: 150px auto; align-items:center !important; ">
+                    &nbsp;
+                    <div class="mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__supporting-text">
+                            <div class="mdl-stepper-horizontal-alternative">
+                                <div class="mdl-stepper-step step-done">
+                                    <div class="mdl-stepper-circle"><span>1</span></div>
+                                    <div class="mdl-stepper-title">Etkinlik Oluştur</div>
+                                    <div class="mdl-stepper-bar-left"></div>
+                                    <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                                <div class="mdl-stepper-step active-step">
+                                    <div class="mdl-stepper-circle"><span>2</span></div>
+                                    <div class="mdl-stepper-title">Tarih-Saat Seçimi</div>
+                                    <div class="mdl-stepper-bar-left"></div>
+                                    <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                                <div class="mdl-stepper-step active-step">
+                                    <div class="mdl-stepper-circle"><span>3</span></div>
+                                    <div class="mdl-stepper-title">Oylama</div>
+                                    <div class="mdl-stepper-bar-left"></div>
+                                    <div class="mdl-stepper-bar-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="container col-xxl-8 px-4 py-5  " style="align-self: center; margin: auto;">
                             <div class="row lg-row g-5 py-5" style=" justify-content: space-between; ">
                                 <form method="post">
@@ -9,7 +34,7 @@
                                         <div class="section1">
                                         <input type="text" style="width: 100% !important; " class="form-control date myinput" placeholder="Tarih Seçimi Yap" readonly>
                                         <button type="button" class="btn btn-danger mybtn mt-3" style="background-color:#FF7B01; border-color: #FF7B01;">Temizle</button>
-                                        <button type="submit" class="btn btn-danger mybtndevam mt-3" style="background-color:#FF7B01; border-color: #FF7B01;">Devam et</button>   
+                                        <button type="submit" class="btn btn-danger mybtndevam mt-3" style="background-color:#FF7B01; border-color: #FF7B01; width: auto;">Devam et</button>
                                     </div>
                                       </div>  
                                 </div>
@@ -22,4 +47,4 @@
                 </section>             
 
 
-            <%- include('./partials/navbar.ejs') %> 
+            <%- include('./partials/footer.ejs') %> 

@@ -1,6 +1,32 @@
-<%- include('./partials/navbar.ejs') %> 
+<%- include('./partials/navbar.ejs') %>
+<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
+&nbsp;
+<div class="mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__supporting-text">
+        <div class="mdl-stepper-horizontal-alternative">
+            <div class="mdl-stepper-step step-done">
+                <div class="mdl-stepper-circle"><span>1</span></div>
+                <div class="mdl-stepper-title">Etkinlik Oluştur</div>
+                <div class="mdl-stepper-bar-left"></div>
+                <div class="mdl-stepper-bar-right"></div>
+            </div>
+            <div class="mdl-stepper-step step-done">
+                <div class="mdl-stepper-circle"><span>2</span></div>
+                <div class="mdl-stepper-title">Tarih-Saat Seçimi</div>
+                <div class="mdl-stepper-bar-left"></div>
+                <div class="mdl-stepper-bar-right"></div>
+            </div>
+            <div class="mdl-stepper-step active-step">
+                <div class="mdl-stepper-circle"><span>3</span></div>
+                <div class="mdl-stepper-title">Oylama</div>
+                <div class="mdl-stepper-bar-left"></div>
+                <div class="mdl-stepper-bar-right"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<section class="tablee" style="width: 60%; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 150px auto;">
+<section class="tablee" style="width: 60%; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 50px auto;">
     <form method="post">
     <table class="table">
         <thead>
@@ -39,5 +65,5 @@
       </table>
     </form>
 </section>
-
+</div>
   <%- include('./partials/footer.ejs') %> 

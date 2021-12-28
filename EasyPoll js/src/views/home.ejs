@@ -3,17 +3,18 @@
 
 <% if (locals.message !="") { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align: center;">
-        <b><%- locals.message %></b>
+        <b>Hoşgeldiniz  <%- locals.message %></b>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 <% } %>  
+
 
 
 <div data-aos="fade" id="createpoll" class="px-4 py-5 my-5 text-center"><img data-aos="fade-up" data-aos-once="true" class="responsive" src="assets/img/Business-Meeting-Illustration.png" style="width: 500px;">
     <h1 data-aos="fade-up" data-aos-once="true" class="display-5 fw-bold">HADİ TOPLANTI PLANLA</h1>
     <div class="col-lg-6 m-auto">
         <p data-aos="fade-up" data-aos-once="true" class="lead mb-4" style="color: #22262a;">Quisque at curabitur mollis ornare, malesuada maecenas. Orci elit tristique, malesuada eu pharetra. Est praesent tortor porttitor aptent, amet quisque.</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"><button class="btn btn-primary btn-lg d-lg-flex justify-content-lg-center action-button" data-bss-hover-animate="pulse" style="padding: 8px 40px;margin-right: 10px;background: #ff7b01;color: #ffffff;font-weight: bold;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;border-color: #ffffff;" type="button">Toplantı Planla</button></div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"><a href="http://localhost:3000/home/createPoll" class="btn btn-primary btn-lg d-lg-flex justify-content-lg-center action-button" data-bss-hover-animate="pulse" style="padding: 8px 40px;margin-right: 10px;background: #ff7b01;color: #ffffff;font-weight: bold;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;border-color: #ffffff;" type="button">Toplantı Planla</a></div>
     </div>
     <section class="features-boxed" style="background: rgb(255,255,255);">
         <div class="intro"></div>

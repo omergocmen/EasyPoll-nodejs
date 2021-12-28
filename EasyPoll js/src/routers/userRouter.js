@@ -13,6 +13,9 @@ router.post('/signIn',userController.postSignIn);
 router.get('/logIn',userController.getLogIn);
 router.post('/logIn',userController.postLogIn);
 
+router.get('/profile',userController.getProfilePage);
+router.post('/profile',userController.postProfilePage);
+
 
 router.get('/verify',verifyControl,userController.getVerify);
 

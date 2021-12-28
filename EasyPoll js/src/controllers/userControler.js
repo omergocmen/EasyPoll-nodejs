@@ -2,7 +2,8 @@ const User=require("../models/userModel");
 const sendJwtToClient=require("../helpers/tokenHelpers");
 const nodemailer=require("nodemailer");
 const jwt=require("jsonwebtoken");
-const bcrypt=require("bcrypt")
+const bcrypt=require("bcrypt");
+const { findByIdAndUpdate } = require("../models/userModel");
 
 module.exports.getAllUsers=async function(req,res)
 {
@@ -124,7 +125,7 @@ module.exports.postLogIn=async function(req,res,next)
                  bcrypt.compare(req.body.password, user.password, function(err, result) {
                     if(result)
                     {
-                        req.flash('info', 'Giriş Başarılı!.  Hoşgeldin  '+user.firstName+" "+user.lastName);
+                        req.flash('info',user.firstName+" "+user.lastName);
                         sendJwtToClient(user,res);
                     }
                     else
@@ -283,3 +284,16 @@ function errorControler(error) {
     return error;
 }
 
+module.exports.getProfilePage=async function(req,res,next)
+{
+    const user=await User.findById(req.tokenUi);
+    res.render("profile",{user});
+}
+
+module.exports.postProfilePage=async function(req,res,next)
+{
+    const result =await User.findByIdAndUpdate(req.tokenUi,{firstName:req.body.firstName,lastName:req.body.lastName,business:req.body.business})
+    console.log(req.body);
+    req.flash('info',"Başarıyla güncellendi");
+    res.redirect("http://localhost:3000/home/users/profile");
+}

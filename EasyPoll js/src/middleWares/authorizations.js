@@ -7,15 +7,8 @@ const getAccessToRoute=(req,res,next)=>{
         next()
 
     } catch (error) {
-       
-        if(error.name==="TokenExpiredError")
-        {
-            res.send("Oturumunuzun süresi doldu lütfen tekrar giriş yapmayı deneyiniz.");
-        }
-        else if(error.name==="JsonWebTokenError")
-        {
-            res.send("Oturum sonlandı lütfen tekrar giriş yapmayı deneyiniz.");
-        }
+        req.flash('info', 'Anket oluşturmak için giriş yapmanız gerekir.');
+        res.redirect("http://localhost:3000/home/users/logIn");
     }
     
 };

@@ -8,6 +8,17 @@ const VoteSchema = new Schema({
         type : String,
         trim:true
     },
+    voterFirstName : {
+        type : String,
+        trim:true
+    },
+    voterLastName : {
+        type : String,
+        trim:true
+    },
+    pollId:{
+        type:String
+    },
     dateId:{
         type:String
     },
@@ -17,6 +28,9 @@ const VoteSchema = new Schema({
     createdAt : {
         type : Date,
         default : Date.now
+    },
+    dates:{
+        type:Array
     }
 
 })

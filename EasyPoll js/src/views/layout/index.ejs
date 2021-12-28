@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="stylesheet" href="/assets/css/Team-Clean.css">
     <link rel="stylesheet" href="/assets/css/Article-List.css">
+    <link rel="stylesheet" href="/assets/css/Account-setting-or-edit-profile.css">
     <link rel="stylesheet" href="/assets/css/Registration-Form-with-Photo.css">
     <link rel="stylesheet" href="/assets/css/calendar.css">
     <link rel="stylesheet" href="/assets/css/step.css">
@@ -55,7 +56,6 @@ function removeElement(target)
     const name=(target.parentElement.textContent);
     const index = cardList.indexOf(name);
     if (index !== -1){cardList.splice(index, 1);}
-    
     target.parentElement.parentElement.parentElement.remove();
 }
 
@@ -68,11 +68,10 @@ function removeElement(target)
  myInput.addEventListener("focus",function(e){
 
     if(e.target.value!="")
-    {   
-        if(!cardList.includes(e.target.value))
+    {   const value=getDayName(e.target.value,"tr");
+        if(!cardList.includes(value))
         {
-        cardList.push(e.target.value);
-        console.log(cardList);
+        cardList.push(value);
         cards.innerHTML="";
         writeInList(cardList);
         }
@@ -93,9 +92,8 @@ function removeElement(target)
     return false;
  }
 
- function getDayName(dateStr, locale){
+function getDayName(dateStr, locale){
 var date = new Date(dateStr);
-console.log(date);
 return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' });        
 }
 
@@ -103,14 +101,23 @@ return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year:
 
   function writeInList(list)    
   { 
+      
       list.forEach(element => {
         
         cards.innerHTML+=`
   <div class="card mb-2 mt-2 " style="min-width: 160px !important; width:98% !important; border: 0.5px solid #FF7B01; margin-bottom: 30px !important; ">
      <div class="card-body">
         
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+         <h3  class="card-title">${element}<i class="fas fa-trash" style="margin-left:25px"></i></h3>
+         <input name="date" style="visibility:hidden";  id="inputMDEx1" value=${element} class="form-control ">   
+=======
+>>>>>>> Stashed changes
          <h3  class="card-title">${getDayName(element, "tr")}<i class="fas fa-trash" style="margin-left:25px "></i></h3>
          <input name="date" style="visibility:hidden";  id="inputMDEx1" value=${getDayName(element, "tr")} class="form-control ">   
+>>>>>>> f6598571904e55a820ad7f037ed0b2809a08e539
          <div class="md-form">
             <input name="beginTime" type="time" id="inputMDEx1"class="form-control">
             <label for="inputMDEx1">Başlangıç saati</label>

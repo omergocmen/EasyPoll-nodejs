@@ -1,6 +1,6 @@
 <%- include('./partials/navbar.ejs') %>
 <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-&nbsp;
+<br>
 <div class="mdl-card mdl-shadow--2dp">
     <div class="mdl-card__supporting-text">
         <div class="mdl-stepper-horizontal-alternative">
@@ -26,10 +26,8 @@
     </div>
 </div>
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<section class="tablee" style="width: 60%; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 150px auto;">
+
+<section class="tablee" style="width: 60%; min-height: 50px; max-height: 500px;  margin: 20px auto;">
 <div class="">
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,16 +48,16 @@
   
   <form method="post">
       <div class="inSection" style="text-align: center;">
-        <h1><%- poll.title.toUpperCase("tr") %> </h1>
+        <br>
+        <h3><%- poll.title.toUpperCase("tr") %> </h3>
         <h6><%- poll.description %> </h6>
       </div>
-      <table class="table">
-=======
->>>>>>> Stashed changes
-<section class="tablee" style="width: 60%; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 50px auto;">
+ 
+</section>
+<section class="tablee" style="width: 70%; min-height: 300px; max-height: 500px; overflow: auto; margin: 50px auto;">
     <form method="post">
     <table class="table">
->>>>>>> f6598571904e55a820ad7f037ed0b2809a08e539
+
         <thead>
           <tr>
             <% dates.forEach(element => { %>
@@ -102,134 +100,77 @@
             <% }) %>
             <th><button type="submit"  class="btn btn-success">Oyla</button></th>
           </tr>
-
-
-
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr> -->
-
         </tbody>
       </table>
     </form>
-</section>
+</section> <br>
 </div>
-<<<<<<< Updated upstream
+
+
 
 <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-    <br>
-        <div class="intro">
-        <h2 class="text-center">ETKİNLİĞİ PAYLAŞ</h2>
-        <p class="text-center">Etkinliğini oylayabilmeleri için katılımcılar ile paylaş!</p>
-    </div>
-    <br>
-    <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
-        <img class="card-img-top" src="https://gray-kwch-prod.cdn.arcpublishing.com/resizer/34XlWhykDU7BCwTdMhjoyUhKcIY=/980x0/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png" alt="Card image cap">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
+  <br>
+      <div class="intro">
+      <h2 class="text-center">ETKİNLİĞİ PAYLAŞ</h2>
+      <p class="text-center">Etkinliğini oylayabilmeleri için katılımcılar ile paylaş!</p>
+  </div>
+  <br>
+  <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
+      <img class="card-img-top" src="https://gray-kwch-prod.cdn.arcpublishing.com/resizer/34XlWhykDU7BCwTdMhjoyUhKcIY=/980x0/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png" alt="Card image cap">
+      <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+  </div>
 <br>
-    <div style="width: 100%;max-width: 500px;height: auto; margin-left: 250px;margin:auto;">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" value="Demoasfas" placeholder="Etkinlik URL" id="url-box" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
-            </div>
-        </div>
-    </div>
-<br>
-
-
-</div>
-<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-    <br>
-    <div class="intro">
-        <h2 class="text-center">Katılımcılara Email Gönder</h2>
-        <p class="text-center">Akete Katılmasını istediğin kullanıcılara Email gönder!</p>
-    </div>
-
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-white">
-                    <div class="card-body">
-                        <form action="javascript:void(0);">
-                            <input type="email" class="form-control add-task" placeholder="Email">
-                        </form>
-                        <div class="todo-list">
-                            <div class="todo-item">
-                                <div class="checker"><span class=""><input type="checkbox"></span></div>
-                                <span>Create theme</span>
-                                <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
-                            </div>
-
-=======
-
-<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-    <br>
-        <div class="intro">
-        <h2 class="text-center">ETKİNLİĞİ PAYLAŞ</h2>
-        <p class="text-center">Etkinliğini oylayabilmeleri için katılımcılar ile paylaş!</p>
-    </div>
-    <br>
-    <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
-        <img class="card-img-top" src="https://gray-kwch-prod.cdn.arcpublishing.com/resizer/34XlWhykDU7BCwTdMhjoyUhKcIY=/980x0/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png" alt="Card image cap">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-<br>
-    <div style="width: 100%;max-width: 500px;height: auto; margin-left: 250px;margin:auto;">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" value="Demoasfas" placeholder="Etkinlik URL" id="url-box" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
-            </div>
-        </div>
-    </div>
+  <div style="width: 100%;max-width: 500px;height: auto; margin-left: 250px;margin:auto;">
+      <div class="input-group mb-3">
+          <input type="text" class="form-control" value="http://localhost:3000/home/createPoll/date/<%- poll._id %>" placeholder="Etkinlik URL" id="url-box" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
+          <div class="input-group-append">
+              <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
+          </div>
+      </div>
+  </div>
 <br>
 
 
 </div>
 <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-    <br>
-    <div class="intro">
-        <h2 class="text-center">Katılımcılara Email Gönder</h2>
-        <p class="text-center">Akete Katılmasını istediğin kullanıcılara Email gönder!</p>
-    </div>
+  <br>
+  <div class="intro">
+      <h2 class="text-center">Katılımcılara Email Gönder</h2>
+      <p class="text-center">Akete Katılmasını istediğin kullanıcılara Email gönder!</p>
+  </div>
 
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-white">
-                    <div class="card-body">
-                        <form action="javascript:void(0);">
-                            <input type="email" class="form-control add-task" placeholder="Email">
-                        </form>
-                        <div class="todo-list">
-                            <div class="todo-item">
-                                <div class="checker"><span class=""><input type="checkbox"></span></div>
-                                <span>Create theme</span>
-                                <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
-                            </div>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card card-white">
+                  <div class="card-body">
+                      <form action="javascript:void(0);">
+                          <input type="email" class="form-control add-task" placeholder="Email">
+                      </form>
+                      <div class="todo-list">
+                          <div class="todo-item">
+                              <div class="checker"><span class=""><input type="checkbox"></span></div>
+                              <span>Create theme</span>
+                              <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
+                          </div>
 
->>>>>>> Stashed changes
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button>
-    <br>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br>
+  <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button>
+  <br>
 </div>
-  <%- include('./partials/footer.ejs') %> 
+
+
+
+
+
+<%- include('./partials/footer.ejs') %>

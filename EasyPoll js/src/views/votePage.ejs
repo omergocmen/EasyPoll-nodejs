@@ -66,4 +66,65 @@
     </form>
 </section>
 </div>
+
+<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
+    <br>
+        <div class="intro">
+        <h2 class="text-center">ETKİNLİĞİ PAYLAŞ</h2>
+        <p class="text-center">Etkinliğini oylayabilmeleri için katılımcılar ile paylaş!</p>
+    </div>
+    <br>
+    <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
+        <img class="card-img-top" src="https://gray-kwch-prod.cdn.arcpublishing.com/resizer/34XlWhykDU7BCwTdMhjoyUhKcIY=/980x0/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png" alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+<br>
+    <div style="width: 100%;max-width: 500px;height: auto; margin-left: 250px;margin:auto;">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" value="Demoasfas" placeholder="Etkinlik URL" id="url-box" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
+            </div>
+        </div>
+    </div>
+<br>
+
+
+</div>
+<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
+    <br>
+    <div class="intro">
+        <h2 class="text-center">Katılımcılara Email Gönder</h2>
+        <p class="text-center">Akete Katılmasını istediğin kullanıcılara Email gönder!</p>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-white">
+                    <div class="card-body">
+                        <form action="javascript:void(0);">
+                            <input type="email" class="form-control add-task" placeholder="Email">
+                        </form>
+                        <div class="todo-list">
+                            <div class="todo-item">
+                                <div class="checker"><span class=""><input type="checkbox"></span></div>
+                                <span>Create theme</span>
+                                <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button>
+    <br>
+</div>
   <%- include('./partials/footer.ejs') %> 

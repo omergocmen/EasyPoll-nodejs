@@ -1,0 +1,45 @@
+<%- include('./partials/navbar.ejs') %>  
+
+
+<section class="polls" style="width: 70%; margin:120px auto ;">
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Anket Başlığı</th>
+            <th scope="col">Anket Açıklaması</th>
+            <th scope="col">Oluşturan Kişi</th>
+            <th scope="col">Oluşturulma Tarihi</th>
+            <th scope="col">Anket Durumu</th>
+            <th scope="col">Toplam Oy Sayısı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(polls.length==0){ %>
+            <td colspan="7"><H3 style="text-align: center;">HENÜZ HİÇ ANKET OLUŞTURULMADI</H3></td>
+          <% } else{ %>  
+            
+            <% let index=1 %> 
+            <% polls.forEach(element => { %>
+                    <tr>
+                        <th scope="col"><%- index %> </th>
+                        <th scope="col"><a href="http://localhost:3000/home/createPoll/date/<%- element._id %> " style="text-decoration: none;"><%- element.title %></a></th>
+                        <th scope="col"><%- element.description %> </th>
+                        <th scope="col"><%- user.firstName %> <%- user.lastName %></th>
+                        <th scope="col"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></th>
+                        <th scope="col">Henüz sonlanmadı</th>
+                        <th scope="col"><%- element.totelVote %> </th>
+                    </tr>
+                    <% index=index+1 %> 
+            <% }) %>
+
+         <% } %>
+
+
+        </tbody>
+      </table>
+</section>
+
+
+<%- include('./partials/footer.ejs') %>  

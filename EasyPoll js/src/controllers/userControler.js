@@ -4,6 +4,9 @@ const nodemailer=require("nodemailer");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcrypt");
 const { findByIdAndUpdate } = require("../models/userModel");
+const Poll=require("../models/pollModel");
+const vote=require("../models/voteModel");
+const mDate=require("../models/dateModel");
 
 module.exports.getAllUsers=async function(req,res)
 {
@@ -292,8 +295,74 @@ module.exports.getProfilePage=async function(req,res,next)
 
 module.exports.postProfilePage=async function(req,res,next)
 {
-    const result =await User.findByIdAndUpdate(req.tokenUi,{firstName:req.body.firstName,lastName:req.body.lastName,business:req.body.business})
-    console.log(req.body);
-    req.flash('info',"Başarıyla güncellendi");
-    res.redirect("http://localhost:3000/home/users/profile");
+    if(req.body.password===undefined)
+    {
+        const result =await User.findByIdAndUpdate(req.tokenUi,{firstName:req.body.firstName,lastName:req.body.lastName,business:req.body.business})
+        req.flash('info',"Başarıyla güncellendi");
+        res.redirect("http://localhost:3000/home/users/profile");
+    }
+    else
+    {
+        
+        const user=await User.findById(req.tokenUi);
+        bcrypt.compare(req.body.password, user.password, function(err, result) {
+            if(result)
+            {
+                if(req.body.email===undefined)
+                {
+                    if(req.body.newPassword==req.body.repeatPassword && req.body.newPassword.length>=6)
+                    {
+                        try {
+                            user.password=req.body.newPassword;
+                            user.save();
+                            req.flash('info', 'success:Şifre başarıyla değiştirildi.');
+                            res.redirect("http://localhost:3000/home/users/profile");
+                        } catch (error) {
+                            req.flash('info', 'danger:Hata oluştu.');
+                            res.redirect("http://localhost:3000/home/users/profile");
+                        }
+                    }
+                    else
+                    {
+                        req.flash('info', 'danger:Yeni şifre en az 6 haneden oluşmalıdır ve tekrar ile aynı olmalıdır.');
+                        res.redirect("http://localhost:3000/home/users/profile");
+                    }
+                }
+                else
+                {
+                    try {
+                        user.email=req.body.email
+                        user.save();
+                        req.flash('info', 'success:Email başarıyla değiştirildi.');
+                        res.redirect("http://localhost:3000/home/users/profile");
+                    } catch (error) {
+                        if(error)
+                        {
+                            console.log("Buraya geliyor mu");
+                        }
+                        
+                        req.flash('info', 'danger:Email formatında yazılmalıdır.');
+                        res.redirect("http://localhost:3000/home/users/profile");
+                    }
+                }
+            }
+            else
+            {
+                
+                req.flash('info', 'danger:Şifre hatalı işlem yapılamaz.');
+                res.redirect("http://localhost:3000/home/users/profile");
+            }
+        })
+        
+    }
+    
+
+}
+
+
+module.exports.getPolls=async function(req,res,next)
+{
+    const user=await User.findById(req.tokenUi);
+    const polls=await Poll.find({ownerId:req.tokenUi}).sort({'createdAt':-1});
+    res.render("polls",{polls,user});
 }

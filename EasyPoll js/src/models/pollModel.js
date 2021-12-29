@@ -15,6 +15,7 @@ const PollSchema = new Schema({
     },
     description : {
         type : String,
+        default : "Açıklama yok.",
         trim:true
     },
     location : {
@@ -33,6 +34,10 @@ const PollSchema = new Schema({
     pollImage : {
         type : String,
         default : "defaultPoll.jpg"
+    },
+    totelVote:{
+        type:String,
+        default:"0"
     }
 
 })

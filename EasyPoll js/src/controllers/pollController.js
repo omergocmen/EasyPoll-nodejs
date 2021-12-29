@@ -16,8 +16,9 @@ module.exports.getCreatePoll=async function(req,res,next)
 module.exports.postCreatePoll=async function(req,res,next)
 {       
     try {
-        
+        console.log(req.body.description);
         const poll=new Poll(req.body);
+        if(poll.description==""){poll.description="Açıklama yok"}
         poll.ownerId=req.tokenUi;
         const result =await poll.save();
         res.redirect("/home/createPoll/"+result._id);
@@ -54,8 +55,14 @@ module.exports.getCalenderPage=async function(req,res,next)
 
 module.exports.postCalenderPage=async function(req,res,next)
 {   
-
-    const result=await mDate.find({pollId:req.params.id});
+    if(typeof req.body.date=="string")
+    {
+        req.flash('info',"En az 2 tarih seçilmelidir.");
+        res.redirect("/home/createPoll/"+req.params.id);
+    }
+    else
+    {
+        const result=await mDate.find({pollId:req.params.id});
     result.forEach(async element => {
         const removedElement=await mDate.findByIdAndRemove(element._id);
     });
@@ -81,17 +88,23 @@ module.exports.postCalenderPage=async function(req,res,next)
     } catch (error) {
         res.send("İşlem başarısız");
     }
+    }
 }
 
 
 module.exports.getVotePage=async function(req,res,next)
 {   
-
+    
     try {
         const poll=await Poll.findOne({_id:req.params.id});
         const dates=await mDate.find({pollId:poll._id});
         const votes=await Vote.find({pollId:req.params.id})
-        res.render("votePage",{dates,votes,poll});
+        let manager=false;
+        if(req.tokenUi==poll.ownerId)
+        {
+            manager=true;
+        }
+        res.render("votePage",{dates,votes,poll,manager});
     } catch (error) {
         res.send("Bir hata oluştu...");
     }
@@ -107,6 +120,9 @@ module.exports.postVotePage=async function(req,res,next)
         voterFirstName:userr[0].firstName,
         voterLastName:userr[0].lastName
     })
+    const poll=await Poll.findById(req.params.id);
+    poll.totelVote=parseInt(poll.totelVote)+1;
+    const resultpoll =await poll.save();
     const result=await vote.save();
     res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
 }
@@ -119,7 +135,7 @@ module.exports.getEditPoll=async function(req,res,next)
 
 module.exports.postEditPoll=async function(req,res,next)
 {   
-    
+
         const result=await Poll.findByIdAndUpdate(req.params.id,{title:req.body.title,description:req.body.description,location:req.body.location});
         const dates=await mDate.find({pollId:req.params.id})
         if(dates.length>0)

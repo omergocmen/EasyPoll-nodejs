@@ -1,6 +1,9 @@
 
                  <%- include('./partials/navbar.ejs') %>                   
-                <section class="dateSection shadow" style="width: 60%; min-width: 800px; margin: 150px auto; align-items:center !important; ">
+               
+
+                
+                 <section class="dateSection shadow" style="width: 60%; min-width: 800px; margin: 150px auto; align-items:center !important; ">
                     &nbsp;
                     <div class="mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__supporting-text">
@@ -27,6 +30,12 @@
                         </div>
                     </div>
                         <div class="container col-xxl-8 px-4 py-5  " style="align-self: center; margin: auto;">
+                            <% if (locals.message !="") { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center;">
+                                    <b><%- locals.message %></b>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                            <% } %>  
                             <div class="row lg-row g-5 py-5" style=" justify-content: space-between; ">
                                 <form method="post">
                                 <div class="col-10 col-sm-8 col-md-4 col-lg-6" style="width: 100%; ">
@@ -38,8 +47,8 @@
                                     </div>
                                       </div>  
                                 </div>
-                                <div class="col-lg-6 col-md-8" style="width: 600px; min-height: 200px; padding-top: 35px; text-align: center; align:center;">
-                                    <div class="cards" style="height: 700px; overflow-y: auto; width: 100%;" ></div>
+                                <div class="col-lg-6 col-md-8" style="width: 600px; min-height: 200px; padding-top: 35px; text-align: center;">
+                                    <div class="cards" style="height: 500px; overflow-y: auto; width: 100%;" ></div>
                                 </div>
                             </form>
                             </div>

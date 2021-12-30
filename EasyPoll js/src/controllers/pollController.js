@@ -101,18 +101,42 @@ module.exports.postCalenderPage=async function(req,res,next)
 
 module.exports.getVotePage=async function(req,res,next)
 {   
-    
+        let votes;
     try {
         const poll=await Poll.findOne({_id:req.params.id});
         const dates=await mDate.find({pollId:poll._id});
-        const votes=await Vote.find({pollId:req.params.id})
+        if(req.query.mode!=undefined && req.query.mode==="true" && req.tokenUi===poll.ownerId)
+        {
+            poll.mode="true";
+            await poll.save();
+        }
+        else if(req.query.mode!=undefined && req.query.mode==="false" && req.tokenUi===poll.ownerId)
+        {
+            poll.mode="false";
+            await poll.save();
+        }
         let manager=false;
         if(req.tokenUi==poll.ownerId)
         {
             manager=true;
         }
+        console.log(poll.mode);
+        if(manager==false && poll.mode=="false")
+        {
+             votes=await Vote.find({
+                 pollId:req.params.id
+                ,voterId:req.tokenUi
+                })
+                console.log("İçeri girdi mi");
+        }
+        else
+        {
+             votes=await Vote.find({pollId:req.params.id})
+        }
+
         res.render("votePage",{dates,votes,poll,manager});
     } catch (error) {
+        console.log(error);
         res.send("Bir hata oluştu...");
     }
 }

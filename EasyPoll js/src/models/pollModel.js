@@ -41,6 +41,10 @@ const PollSchema = new Schema({
     },
     activeLink:{
         type:String
+    },
+    mode:{
+        type:String,
+        default:true
     }
 
 })

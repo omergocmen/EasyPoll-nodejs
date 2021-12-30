@@ -73,8 +73,18 @@
                   </a>
                   <% } %>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/edit/<%- dates[0].pollId %>">Anket bilgileri güncelle</a></li>
-                  <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/<%- dates[0].pollId %>">Takvim bilgileri güncelle</a></li>
+
+
+                 
+
+                  <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/edit/<%- dates[0].pollId %>">Anket bilgileri Güncelle</a></li>
+                  <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/<%- dates[0].pollId %>">Takvim bilgileri Güncelle</a></li>
+                  
+                  <% if(poll.mode=="true"){ %>
+                    <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/date/<%- dates[0].pollId %>?mode=false">Sonuçları Gizle</a></li>
+                    <% } else if(poll.mode=="false") { %>
+                      <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/date/<%- dates[0].pollId %>?mode=true">Herkese Açık</a></li>
+                    <% } %>
                   <li><a class="dropdown-item" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Anketi sil
                   </a></li>

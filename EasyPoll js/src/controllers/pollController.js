@@ -15,7 +15,6 @@ module.exports.getCreatePoll=async function(req,res,next)
 module.exports.postCreatePoll=async function(req,res,next)
 {       
     try {
-        console.log(req.body.description);
         const poll=new Poll(req.body);
         if(poll.description==""){poll.description="Açıklama yok"}
         poll.ownerId=req.tokenUi;
@@ -23,6 +22,8 @@ module.exports.postCreatePoll=async function(req,res,next)
         const userr=await User.findById(poll.ownerId);
         userr.totelPoll=parseInt(userr.totelPoll)+1;
         const resultuser=await userr.save();
+        poll.activeLink="http://localhost:3000/home/createPoll/"+result.id;
+        await poll.save();
         res.redirect("/home/createPoll/"+result._id);
     } catch (error) {
         let errorArray=[];
@@ -57,6 +58,7 @@ module.exports.getCalenderPage=async function(req,res,next)
 
 module.exports.postCalenderPage=async function(req,res,next)
 {   
+    
     if(typeof req.body.date=="string")
     {
         req.flash('info',"En az 2 tarih seçilmelidir.");
@@ -85,6 +87,9 @@ module.exports.postCalenderPage=async function(req,res,next)
             if(date.endTime==""){date.endTime="--"}
             const result =await date.save();
         }
+        const poll=await Poll.findById(req.params.id);
+        poll.activeLink="http://localhost:3000/home/createPoll/date/"+req.params.id;
+        await poll.save();
         res.redirect("/home/createPoll/date/"+req.params.id);
         
     } catch (error) {
@@ -114,6 +119,7 @@ module.exports.getVotePage=async function(req,res,next)
 
 module.exports.postVotePage=async function(req,res,next)
 {
+    
     const userr=await User.find({_id:req.tokenUi});
     const vote= await new Vote({
         pollId:req.params.id,

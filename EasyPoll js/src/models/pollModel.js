@@ -38,6 +38,9 @@ const PollSchema = new Schema({
     totelVote:{
         type:String,
         default:"0"
+    },
+    activeLink:{
+        type:String
     }
 
 })

@@ -43,8 +43,13 @@
                                     <h5>Hakkında</h5>
                                     <p><%- user.business %></p>
                                     <p><%- user.biography %></p>
-                                    <p>Katılım Tarihi <%- user.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>
-                                    <p>Toplam 128 anket oluşturdu</p>
+                                    <p>Katılım Tarihi <%- user.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %>.</p>
+                                    <% if(user.totelPoll==0){ %>
+                                        <p>Henüz hiç anket oluşturmadı.</p>
+                                      <% } else{ %>  
+                                        <p>Toplam <%- user.totelPoll %>  anket oluşturdu.</p>
+                                     <% } %>
+                                    
                                 </div>
         
                             </div>

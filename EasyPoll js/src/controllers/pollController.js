@@ -9,7 +9,6 @@ const User=require("../models/userModel");
 
 module.exports.getCreatePoll=async function(req,res,next)
 {
-    
     res.render("createPoll");
 }
 
@@ -21,6 +20,9 @@ module.exports.postCreatePoll=async function(req,res,next)
         if(poll.description==""){poll.description="Açıklama yok"}
         poll.ownerId=req.tokenUi;
         const result =await poll.save();
+        const userr=await User.findById(poll.ownerId);
+        userr.totelPoll=parseInt(userr.totelPoll)+1;
+        const resultuser=await userr.save();
         res.redirect("/home/createPoll/"+result._id);
     } catch (error) {
         let errorArray=[];

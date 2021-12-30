@@ -66,6 +66,10 @@ const UserSchema = new Schema({
     profileImage : {
         type : String,
         default : "default.jpg"
+    },
+    totelPoll:{
+        type:String,
+        default:"0"
     }
 
 })

@@ -54,7 +54,8 @@
   }
   else if(e.target.className==="fas fa-calendar-plus")
   {
-    cardList.push(e.target.parentElement.textContent);
+    console.log(e.target.parentElement.textContent);
+    cardList.push(e.target.parentElement.textContent.trim());
     cards.innerHTML="";
     writeInList(cardList);
   }
@@ -62,9 +63,11 @@
 
 function removeElement(target)
 {
+    
     const name=(target.parentElement.textContent);
-    const index = cardList.indexOf(name);
+    const index = cardList.indexOf(name.trim());
     if (index !== -1){cardList.splice(index, 1);}
+    console.log(cardList);
     target.parentElement.parentElement.parentElement.remove();
 }
 
@@ -114,7 +117,7 @@ return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year:
         cards.innerHTML+=`
   <div class="card mb-2 mt-2 nav nav-tabs"  onblur="myFunction()" style="min-width: 160px !important; width:98% !important; border: 0.5px solid #FF7B01; margin-bottom: 30px !important;" >
      <div class="card-body">
-         <h3  class="card-title">${element}<i class="fas fa-trash" style="margin-left:25px"></i>
+         <h3 class="card-title">${element}<i class="fas fa-trash" style="margin-left:25px"></i>
             <i class="fas fa-calendar-plus" style="margin-left:25px"></i></h3>
          <input name="date" style="visibility:hidden";  id="inputMDEx1" value=${element} class="form-control ">   
          <div class="md-form">
@@ -129,7 +132,10 @@ return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year:
   }
 
 
-
+function myDeneme()
+{
+    console.log("Çalıştı");
+}
 
 function myFunction()
 {

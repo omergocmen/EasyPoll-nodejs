@@ -63,6 +63,7 @@
             <% dates.forEach(element => { %>
                 <th scope="col"><%- element.date %>  <p><b style="font-size: 10px;"><%- element.beginTime %> </b>:<b style="font-size: 10px;"><%- element.endTime %> </b></p> </th>
             <% }) %>
+            <th>Düzenle</th>
             <th>Oy Kullanan</th>
             <th>
               <div class="dropdown">
@@ -94,16 +95,16 @@
           </tr>
         </thead>
         <tbody>
-          
             <% votes.forEach(voteElement => { %>
               <tr>
                     <% dates.forEach(dateElement => { %>
                       <% if(voteElement.dates.includes(dateElement._id)){ %>
-                        <td>V</td>
+                        <td><i class="fas fa-check"></i></td>
                       <% } else{ %>  
-                        <td>X</td>
+                        <td><i class="fas fa-times"></i></td>
                      <% } %>
                   <% }) %>
+                  <td><i onclick="myDeneme()" class="fas fa-edit"></i></td>
                   <td><%- voteElement.voterFirstName %>  <%- voteElement.voterLastName %> </td>
                 </tr>
             <% }) %>
@@ -185,10 +186,6 @@
 
 
 <% } %>
-
-
-
-
 
 
 

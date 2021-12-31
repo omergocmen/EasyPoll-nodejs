@@ -152,6 +152,11 @@ module.exports.postVotePage=async function(req,res,next)
         voterFirstName:userr[0].firstName,
         voterLastName:userr[0].lastName
     })
+    vote.dates.forEach(async element => {
+        const date=await mDate.findById(element);
+        date.totel=parseInt(date.totel)+1;
+        await date.save();
+    });
     const poll=await Poll.findById(req.params.id);
     poll.totelVote=parseInt(poll.totelVote)+1;
     const resultpoll =await poll.save();

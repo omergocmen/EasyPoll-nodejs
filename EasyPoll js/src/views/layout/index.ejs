@@ -54,7 +54,7 @@
   }
   else if(e.target.className==="fas fa-calendar-plus")
   {
-    console.log(e.target.parentElement.textContent);
+    
     cardList.push(e.target.parentElement.textContent.trim());
     cards.innerHTML="";
     writeInList(cardList);
@@ -132,10 +132,7 @@ return date.toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year:
   }
 
 
-function myDeneme()
-{
-    console.log("Çalıştı");
-}
+
 
 function myFunction()
 {

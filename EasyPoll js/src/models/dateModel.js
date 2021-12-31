@@ -20,6 +20,10 @@ const DateSchema = new Schema({
     endTime : {
         type : String
         // ,required:[true,"Meslek veya faaliyet bilgisini girmek zorunludur."]
+    },
+    totel:{
+        type:String,
+        default:"0"
     }
 })
 

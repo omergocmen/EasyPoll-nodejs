@@ -6,6 +6,8 @@ const bcrypt=require("bcrypt")
 const mDate=require("../models/dateModel");
 const Vote=require("../models/voteModel");
 const User=require("../models/userModel");
+const qrCodeManager=require("../helpers/qrCodeManager");
+const qr=require("qrcode");
 
 module.exports.getCreatePoll=async function(req,res,next)
 {
@@ -120,21 +122,27 @@ module.exports.getVotePage=async function(req,res,next)
         {
             manager=true;
         }
-        console.log(poll.mode);
+        
         if(manager==false && poll.mode=="false")
         {
              votes=await Vote.find({
                  pollId:req.params.id
                 ,voterId:req.tokenUi
                 })
-                console.log("İçeri girdi mi");
         }
         else
         {
              votes=await Vote.find({pollId:req.params.id})
         }
+        
+        
+        qr.toDataURL(poll.activeLink, (err, src) => {
+                if (err) throw err ;
+                res.render("votePage",{dates,votes,poll,manager,src});
+        });
+        
 
-        res.render("votePage",{dates,votes,poll,manager});
+    
     } catch (error) {
         console.log(error);
         res.send("Bir hata oluştu...");

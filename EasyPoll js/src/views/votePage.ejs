@@ -55,7 +55,7 @@
  
 </section>
 <section class="tablee" style="width: 70%; min-height: 300px; max-height: 500px; overflow: auto; margin: 50px auto;">
-    <form method="post">
+   
     <table class="table">
 
         <thead>
@@ -92,8 +92,9 @@
           </tr>
         </thead>
         <tbody>
+          <form method="post">
             <% votes.forEach(voteElement => { %>
-              <tr>
+              <tr class="tr">
                     <% dates.forEach(dateElement => { %>
                       <% if(voteElement.dates.includes(dateElement._id)){ %>
                         <td><i class="fas fa-check"></i></td>
@@ -101,12 +102,13 @@
                         <td><i class="fas fa-times"></i></td>
                      <% } %>
                   <% }) %>
-                  <td><i class="fas fa-pencil-alt pencil"></i></td>
-                  <td><%- voteElement.voterFirstName %>  <%- voteElement.voterLastName %> </td>  
-                </tr>
+                  <td><i  class="fas fa-pencil-alt pencil"></i></td>
+                  <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
+              </tr>
             <% }) %>
+            <tr class="oyla">
             <% dates.forEach(dateElement => { %>
-              <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+              <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
             <% }) %>
             <th></th>
             <th><button type="submit"  class="btn btn-success">Oyla</button></th>
@@ -117,10 +119,13 @@
             <% }) %>
           </tr>
         </tbody>
+      </form>
       </table>
-    </form>
+    
 </section> <br>
 </div>
+
+
 
 
 <% if (manager==true) { %>
@@ -134,9 +139,9 @@
     </div>
     <br>
     <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
-        <img class="card-img-top" src="https://gray-kwch-prod.cdn.arcpublishing.com/resizer/34XlWhykDU7BCwTdMhjoyUhKcIY=/980x0/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png" alt="Card image cap">
+        <img class="card-img-top" src=<%- src %>  alt="Card image cap">
         <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">İster QR kod ister link sen nasıl istersen öyle paylaş.</p>
         </div>
     </div>
   <br>
@@ -169,21 +174,21 @@
                         <form action="javascript:void(0);">
                             <input type="email" class="form-control add-task" placeholder="Email">
                         </form>
+                      <form method="post">
                         <div class="todo-list">
                             <div class="todo-item">
-                                <div class="checker"><span class=""><input type="checkbox"></span></div>
-                                <span>Create theme</span>
                                 <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
                             </div>
-  
                         </div>
+                        <button class="btn btn-success" type="submit">Gönder</button>
+                      </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <br>
-    <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button>
+    <!-- <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button> -->
     <br>
   </div>
 

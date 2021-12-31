@@ -40,12 +40,16 @@
             multidate: false
         });
 
+        
  const mybtn=document.querySelector(".mybtn");
  const myInput=document.querySelector(".date");
  const cards=document.querySelector(".cards");
  const cardList=[];
  const clearsButton=document.querySelector(".mybtn-clear");
  const endTime=document.querySelectorAll(".date");
+
+ 
+
 
  cards.addEventListener("click",(e)=>{
   if(e.target.className==="fas fa-trash")
@@ -67,7 +71,6 @@ function removeElement(target)
     const name=(target.parentElement.textContent);
     const index = cardList.indexOf(name.trim());
     if (index !== -1){cardList.splice(index, 1);}
-    console.log(cardList);
     target.parentElement.parentElement.parentElement.remove();
 }
 

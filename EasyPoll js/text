@@ -55,3 +55,42 @@
                       <div class="form-group"><label for="zIp">Zip Code</label><input type="text" class="form-control" id="zIp" placeholder="Zip Code" /></div>
                   </div>
               </div>
+
+
+
+                        <!-- <tr>
+            <% dates.forEach(dateElement => { %>
+              <td><i style="font-size: 10px;" class="fas fa-check"></i><%- dateElement.totel %> </td>
+            <% }) %>
+          </tr> -->
+
+
+                            <!-- <td><input style="width: 50px; visibility: hidden;" readonly type="text" value="<%- voteElement._id %>" ></td>  -->
+                  <!-- <td style="visibility: hidden; "><%- voteElement.id %> </td>  -->
+
+
+
+                  denemee=async(text,a)=>
+{
+    console.log(a.parentElement.parentElement);
+    let mhtml=''; 
+    let comp=a.parentElement.previousElementSibling;
+    while(comp!=null)
+    {
+        console.log(comp.firstChild.className);
+        if(comp.firstChild.className==="fas fa-times")
+        {
+            
+            mhtml='<td><input name="votes" value="61cf4651fc220ec014b5cf17" class="form-check-input" type="checkbox" ></td>'+mhtml
+        }
+        else if(comp.firstChild.className==="fas fa-check")
+        {
+            mhtml='<td><input name="votes" value="61cf4651fc220ec014b5cf17" class="form-check-input" type="checkbox"  checked></td>'+mhtml;
+        }
+        comp=comp.previousElementSibling;   
+    }
+    
+    mhtml+='<td><input name="votes" value="asdsa"  class="form-control" type="text"  id=""></td>';
+    a.parentElement.parentElement.innerHTML=mhtml;
+    
+}

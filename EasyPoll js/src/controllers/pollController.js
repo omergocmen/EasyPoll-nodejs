@@ -167,7 +167,7 @@ module.exports.postVotePage=async function(req,res,next)
                 )
                 await comment.save();
             }
-            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
+            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#comment")
         }
         else{
             let user =await User.findById(req.tokenUi);
@@ -181,7 +181,7 @@ module.exports.postVotePage=async function(req,res,next)
                 }          
             comment.replies.push(reply);
             comment.save();
-            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
+            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#comment")
         }
         
 
@@ -192,7 +192,7 @@ module.exports.postVotePage=async function(req,res,next)
         if(typeof req.body.mail==="string")
         {
             req.flash('info',"danger:Lütfen email girdikten sonra gönder tuşuna basınız emaillerin doğru olduğundan emin olunuz.")
-            res.redirect("/home/createPoll/date/"+req.params.id);
+            res.redirect("/home/createPoll/date/"+req.params.id+"#comment");
         }
         else if (typeof req.body.mail==="object")
         {
@@ -218,7 +218,7 @@ module.exports.postVotePage=async function(req,res,next)
                 });
             }
             req.flash('info',"success:Davet linki başarıyla seçtiğiniz emaillere gönderildi.")
-            res.redirect("/home/createPoll/date/"+req.params.id);
+            res.redirect("/home/createPoll/date/"+req.params.id+"#sendemail");
         }
     }
     else
@@ -241,7 +241,7 @@ module.exports.postVotePage=async function(req,res,next)
         poll.totelVote=parseInt(poll.totelVote)+1;
         const resultpoll =await poll.save();
         const result=await vote.save();
-        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
     }
     
 }
@@ -285,11 +285,17 @@ module.exports.getDeletePoll=async function(req,res,next)
 
 module.exports.getDeleteMessage=async function(req,res,next)
 {   
-    try {
-        const result =await Comment.findByIdAndRemove(req.params.id);
-        res.redirect("http://localhost:3000/home/createPoll/date/"+result.pollId);
-    } catch (error) {
-        res.send("Bir hata oluştu");
+    const comment=await Comment.findById(req.params.id);
+    if(comment.ownerId===req.tokenUi){
+        try {
+            const result =await Comment.findByIdAndRemove(req.params.id);
+            res.redirect("http://localhost:3000/home/createPoll/date/"+result.pollId+"#comment");
+        } catch (error) {
+            res.send("Bir hata oluştu");
+        }
+    }
+    else{
+        res.redirect("http://localhost:3000/home/createPoll/date/"+comment.pollId+"#comment")
     }
 }
 

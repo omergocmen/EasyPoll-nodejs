@@ -244,11 +244,19 @@ function myFunction()
         todo();
 
         $(".add-task").keypress(function (e) {
+            
             if ((e.which == 13)&&(!$(this).val().length == 0)) {
-                $('<div class="todo-item"><div class="checker"><span class=""><input type="checkbox"></span></div> <span>' + $(this).val() + '</span> <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a></div>').insertAfter('.todo-list .todo-item:last-child');
-                $(this).val('');
+                if($(this).val().includes("gmail.com")&&($(this).val().length >= 16))
+                {
+                    $('<div class="todo-item"><div class="checker"><span class=""></span></div> <span>' + $(this).val() + '</span> <i onclick="deleteTodo(this)" style="margin-left:25px;" class="fas fa-trash"></i><input type="text" style="visibility: hidden;" name="deneme" value='+$(this).val()+' class="form-control"><a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a></div>').insertAfter('.todo-list .todo-item:last-child');
+                    $(this).val('');
+                }
+                else{
+                    alert('Lütfen doğru formatta bir gmail giriniz.');
+                }
+
             } else if(e.which == 13) {
-                alert('Please enter new task');
+                alert('Lütfen email kısmına bir email yazıp enter tuşuna basınız.');
             }
             $(document).on('.todo-list .todo-item.added input').click(function() {
                 if($(this).is(':checked')) {
@@ -262,6 +270,11 @@ function myFunction()
             });
         });
     });
+
+    function deleteTodo(a)
+    {   a.parentElement.remove();
+    }
+
 </script>
 </body>
 </html>

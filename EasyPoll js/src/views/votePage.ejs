@@ -1,4 +1,14 @@
 <%- include('./partials/navbar.ejs') %>
+
+
+<% if (locals.message !="") { %>
+  <div class="alert alert-<%- locals.message[0].split(":")[0] %> alert-dismissible fade show" role="alert" style="text-align: center;">
+      <b><%- locals.message[0].split(":")[1] %></b>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>  
+
+
 <div class="dateSection shadow" style="width:100%;max-width:960px; height:900px;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
 <br>
 <div class="mdl-card mdl-shadow--2dp">
@@ -156,12 +166,15 @@
   <br>
   
   
+
+
+
   </div>
   <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
     <br>
     <div class="intro">
         <h2 class="text-center">Katılımcılara Email Gönder</h2>
-        <p class="text-center">Akete Katılmasını istediğin kullanıcılara Email gönder!</p>
+        <p class="text-center">Ankete Katılmasını istediğin kullanıcılara Email gönder!</p>
     </div>
   
   
@@ -177,6 +190,7 @@
                       <form method="post">
                         <div class="todo-list">
                             <div class="todo-item">
+                              <input type="text" style="visibility: hidden;" readonly name="deneme" value="email" id="">
                                 <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
                             </div>
                         </div>
@@ -188,7 +202,6 @@
         </div>
     </div>
     <br>
-    <!-- <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:850px; margin: auto"  type="button">GÖNDER</button> -->
     <br>
   </div>
 

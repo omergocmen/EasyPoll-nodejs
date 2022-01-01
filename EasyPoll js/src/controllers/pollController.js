@@ -6,7 +6,6 @@ const bcrypt=require("bcrypt")
 const mDate=require("../models/dateModel");
 const Vote=require("../models/voteModel");
 const User=require("../models/userModel");
-const qrCodeManager=require("../helpers/qrCodeManager");
 const qr=require("qrcode");
 
 module.exports.getCreatePoll=async function(req,res,next)
@@ -151,25 +150,62 @@ module.exports.getVotePage=async function(req,res,next)
 
 module.exports.postVotePage=async function(req,res,next)
 {
+    if(req.body.deneme)
+    {
+        if(typeof req.body.deneme==="string")
+        {
+            req.flash('info',"danger:Lütfen email girdikten sonra gönder tuşuna basınız emaillerin doğru olduğundan emin olunuz.")
+            res.redirect("/home/createPoll/date/"+req.params.id);
+        }
+        else if (typeof req.body.deneme==="object")
+        {
+            let userr=await User.find({_id:req.tokenUi});
+            
+            for (let index = 1; index < req.body.deneme.length; index++) {
+                
+                let transporter=await nodemailer.createTransport({
+                    service:'gmail',
+                    auth:{
+                        user:"nodejsdeneme4@gmail.com",
+                        pass:"omer125963"
+                    }
+                });
     
-    const userr=await User.find({_id:req.tokenUi});
-    const vote= await new Vote({
-        pollId:req.params.id,
-        voterId:userr[0]._id,
-        dates:req.body.votes,
-        voterFirstName:userr[0].firstName,
-        voterLastName:userr[0].lastName
-    })
-    vote.dates.forEach(async element => {
-        const date=await mDate.findById(element);
-        date.totel=parseInt(date.totel)+1;
-        await date.save();
-    });
-    const poll=await Poll.findById(req.params.id);
-    poll.totelVote=parseInt(poll.totelVote)+1;
-    const resultpoll =await poll.save();
-    const result=await vote.save();
-    res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+                await transporter.sendMail({
+                    from:"EasyPoll Anket Uygulaması <info@nodejsuygulama.com",
+                    to:req.body.deneme[index],
+                    subject:userr[0].firstName+" "+userr[0].lastName+" Tarafından bir ankete davet edildiniz.",
+                    text:"Ankete katılmak için http://localhost:3000/home/createPoll/date/"+req.params.id+" linkine tıklayınız"
+                },(error,info)=>{
+                    transporter.close();
+                });
+            }
+            req.flash('info',"success:Davet linki başarıyla seçtiğiniz emaillere gönderildi.")
+            res.redirect("/home/createPoll/date/"+req.params.id);
+        }
+    }
+    else
+    {
+        const userr=await User.find({_id:req.tokenUi});
+        const vote= await new Vote({
+            pollId:req.params.id,
+            voterId:userr[0]._id,
+            dates:req.body.votes,
+            voterFirstName:userr[0].firstName,
+            voterLastName:userr[0].lastName
+        })
+        vote.dates.forEach(async element => {
+            const date=await mDate.findById(element);
+            date.totel=parseInt(date.totel)+1;
+            await date.save();
+        });
+        const poll=await Poll.findById(req.params.id);
+        poll.totelVote=parseInt(poll.totelVote)+1;
+        const resultpoll =await poll.save();
+        const result=await vote.save();
+        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+    }
+    
 }
 
 

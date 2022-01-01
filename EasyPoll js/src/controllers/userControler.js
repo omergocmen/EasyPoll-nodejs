@@ -208,7 +208,7 @@ module.exports.postForgetPassword=async function(req,res)
             });
 
             await transporter.sendMail({
-                from:"Nodejs Uygulaması <info@nodejsuygulama.com",
+                from:"EasyPoll Anket Uygulaması <info@nodejsuygulama.com",
                 to:user.email,
                 subject:"Şifre yenileme linkiniz.",
                 text:"Şifrenizi yenilemek için linke tıklayınız  "+url

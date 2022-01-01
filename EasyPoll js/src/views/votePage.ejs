@@ -49,7 +49,7 @@
         <h5 class="modal-title" id="exampleModalLabel"><%- poll.title.toUpperCase("tr") %> Anketini silmek istiyor musunuz ?</h5>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-danger" href="http://localhost:3000/home/createPoll/delete/<%- dates[0].pollId %>" >Sil</a>
+        <a class="btn btn-danger" href="http://localhost:3000/home/createPoll/delete/<%- dates[0].pollId %>">Sil</a>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
                     <% } else if(poll.mode=="false") { %>
                       <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/date/<%- dates[0].pollId %>?mode=true">Herkese Açık</a></li>
                     <% } %>
-                  <li><a class="dropdown-item" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Anketi sil
                   </a></li>
                 </ul>
@@ -138,38 +138,77 @@
 
 
 
+
 <% if (manager==true) { %>
 
 
-  <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
+<div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
     <br>
-        <div class="intro">
-        <h2 class="text-center">ETKİNLİĞİ PAYLAŞ</h2>
-        <p class="text-center">Etkinliğini oylayabilmeleri için katılımcılar ile paylaş!</p>
-    </div>
-    <br>
-    <div class="card" style="width: 15rem; margin-left: 350px;margin:auto;">
-        <img class="card-img-top" src=<%- src %>  alt="Card image cap">
-        <div class="card-body">
-            <p class="card-text">İster QR kod ister link sen nasıl istersen öyle paylaş.</p>
-        </div>
-    </div>
-  <br>
-    <div style="width: 100%;max-width: 500px;height: auto; margin-left: 250px;margin:auto;">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" value="http://localhost:3000/home/createPoll/date/<%- poll._id %>" placeholder="Etkinlik URL" id="url-box" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
+
+    <!-- Buranın altı tamamen yorumlar kısmı -->
+    <div class="comments" style="width: 70%; margin:25px auto;">
+      <% let index=0 %> 
+      <% comments.forEach(element => { %>
+        <% index=index+1 %> 
+        
+        <div class="card text-white bg-secondary mb-3" style="width: 100%;">
+          <div class="card-header"><%- element.ownerName %>  <a style="float: right;" class="btn btn-danger" href="http://localhost:3000/home/createPoll/deleteMessage/<%- element._id %>">X</a>                    </div>
+          <div class="card-body">
+            <h5 class="card-title"><%- element.text %></h5>
+            <p class="card-text"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>            
+            
+            <% element.replies.forEach(e => { %>
+              <div class="repliess" style="width: 75%; float: right;">
+                <div class="card-header"><%- e.ownerName %> </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%- e.text %></h5>
+                  <p class="card-text"><%- e.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>
+                </div>
+              </div>
+              <% }) %>
+
+
+          </div>
+
+
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" style="background-color: #6C757D;">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="btn btn-success collapsed" style="width: auto; margin: 5px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo<%- index%>" aria-expanded="true" aria-controls="collapseOne">
+                    Yanıtla
+                    </button>
+                </h2>
+                <div id="collapseTwo<%- index%>" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                  
+                    <form method="post">
+                      <input type="text" style="visibility: hidden;" readonly name="comment" value="<%- element.id %> " id="">
+                      <textarea class="form-control mb-3 control" required name="comment" placeholder="Yorumlarınız Yazınız." id="floatingTextarea2" style="height: 100px"></textarea>
+                      <button class="btn btn-success commentbtn"  type="submit">Yorum Yap</button>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
             </div>
+            
         </div>
+      <% }) %>
+
+      <form method="post">
+        <input type="text" style="visibility: hidden;" readonly name="comment" value="comment" id="">
+        <textarea class="form-control mb-3 control" required name="comment" placeholder="Yorumlarınız Yazınız." id="floatingTextarea2" style="height: 100px"></textarea>
+        <button class="btn btn-success commentbtn"  type="submit">Yorum Yap</button>
+      
+      </form>
     </div>
-  <br>
-  
-  
+
+     <!-- Buranın üstü tamamen yorumlar kısmı -->
+    <br>
+</div>
 
 
 
-  </div>
   <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
     <br>
     <div class="intro">
@@ -190,7 +229,7 @@
                       <form method="post">
                         <div class="todo-list">
                             <div class="todo-item">
-                              <input type="text" style="visibility: hidden;" readonly name="deneme" value="email" id="">
+                              <input type="text" style="visibility: hidden;" readonly name="mail" value="email" id="">
                                 <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
                             </div>
                         </div>

@@ -7,6 +7,8 @@ const mDate=require("../models/dateModel");
 const Vote=require("../models/voteModel");
 const User=require("../models/userModel");
 const qr=require("qrcode");
+const Comment=require("../models/commentModel");
+const { findByIdAndRemove } = require("../models/pollModel");
 
 module.exports.getCreatePoll=async function(req,res,next)
 {
@@ -134,34 +136,69 @@ module.exports.getVotePage=async function(req,res,next)
              votes=await Vote.find({pollId:req.params.id})
         }
         
-        
+        let comments=await Comment.find({pollId:req.params.id})
         qr.toDataURL(poll.activeLink, (err, src) => {
                 if (err) throw err ;
-                res.render("votePage",{dates,votes,poll,manager,src});
+                res.render("votePage",{dates,votes,poll,manager,comments,src});
         });
         
 
     
     } catch (error) {
-        console.log(error);
         res.send("Bir hata oluştu...");
     }
 }
 
 module.exports.postVotePage=async function(req,res,next)
 {
-    if(req.body.deneme)
+    if(req.body.comment)
     {
-        if(typeof req.body.deneme==="string")
+        if(req.body.comment[0]=="comment")
+        {
+            let user=await User.findById(req.tokenUi);
+            for (let index = 1; index < req.body.comment.length; index++) {
+                const comment=new Comment(
+                    {
+                    pollId:req.params.id,
+                    ownerId:req.tokenUi,
+                    ownerName:user.firstName+" "+user.lastName,
+                    text:req.body.comment[index]
+                    }
+                )
+                await comment.save();
+            }
+            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
+        }
+        else{
+            let user =await User.findById(req.tokenUi);
+            let comment=await Comment.findById(req.body.comment[0].trim());
+            const reply=
+                {
+                ownerId:req.tokenUi,
+                ownerName:user.firstName +" "+user.lastName,
+                text:req.body.comment[1],
+                createdAt:new Date(Date.now())
+                }          
+            comment.replies.push(reply);
+            comment.save();
+            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
+        }
+        
+
+    }
+    else if(req.body.mail)
+    {
+        
+        if(typeof req.body.mail==="string")
         {
             req.flash('info',"danger:Lütfen email girdikten sonra gönder tuşuna basınız emaillerin doğru olduğundan emin olunuz.")
             res.redirect("/home/createPoll/date/"+req.params.id);
         }
-        else if (typeof req.body.deneme==="object")
+        else if (typeof req.body.mail==="object")
         {
             let userr=await User.find({_id:req.tokenUi});
             
-            for (let index = 1; index < req.body.deneme.length; index++) {
+            for (let index = 1; index < req.body.mail.length; index++) {
                 
                 let transporter=await nodemailer.createTransport({
                     service:'gmail',
@@ -173,7 +210,7 @@ module.exports.postVotePage=async function(req,res,next)
     
                 await transporter.sendMail({
                     from:"EasyPoll Anket Uygulaması <info@nodejsuygulama.com",
-                    to:req.body.deneme[index],
+                    to:req.body.mail[index],
                     subject:userr[0].firstName+" "+userr[0].lastName+" Tarafından bir ankete davet edildiniz.",
                     text:"Ankete katılmak için http://localhost:3000/home/createPoll/date/"+req.params.id+" linkine tıklayınız"
                 },(error,info)=>{
@@ -186,6 +223,7 @@ module.exports.postVotePage=async function(req,res,next)
     }
     else
     {
+        
         const userr=await User.find({_id:req.tokenUi});
         const vote= await new Vote({
             pollId:req.params.id,
@@ -242,6 +280,17 @@ module.exports.getDeletePoll=async function(req,res,next)
     });
     const rPoll=await Poll.findByIdAndRemove(req.params.id);
     res.redirect("http://localhost:3000/home/createPoll");
+}
+
+
+module.exports.getDeleteMessage=async function(req,res,next)
+{   
+    try {
+        const result =await Comment.findByIdAndRemove(req.params.id);
+        res.redirect("http://localhost:3000/home/createPoll/date/"+result.pollId);
+    } catch (error) {
+        res.send("Bir hata oluştu");
+    }
 }
 
 

@@ -47,8 +47,10 @@
  const cardList=[];
  const clearsButton=document.querySelector(".mybtn-clear");
  const endTime=document.querySelectorAll(".date");
-
+ let comment=document.querySelector(".commentbtn");
  
+
+
 
 
  cards.addEventListener("click",(e)=>{
@@ -248,7 +250,7 @@ function myFunction()
             if ((e.which == 13)&&(!$(this).val().length == 0)) {
                 if($(this).val().includes("gmail.com")&&($(this).val().length >= 16))
                 {
-                    $('<div class="todo-item"><div class="checker"><span class=""></span></div> <span>' + $(this).val() + '</span> <i onclick="deleteTodo(this)" style="margin-left:25px;" class="fas fa-trash"></i><input type="text" style="visibility: hidden;" name="deneme" value='+$(this).val()+' class="form-control"><a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a></div>').insertAfter('.todo-list .todo-item:last-child');
+                    $('<div class="todo-item"><div class="checker"><span class=""></span></div> <span>' + $(this).val() + '</span> <i onclick="deleteTodo(this)" style="margin-left:25px;" class="fas fa-trash"></i><input type="text" style="visibility: hidden;" name="mail" value='+$(this).val()+' class="form-control"><a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a></div>').insertAfter('.todo-list .todo-item:last-child');
                     $(this).val('');
                 }
                 else{

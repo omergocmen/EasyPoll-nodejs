@@ -20,6 +20,8 @@ router.post('/',pollController.postCreatePoll);
 
 router.get('/delete/:id',pollController.getDeletePoll);
 
+router.get('/deleteMessage/:id',pollController.getDeleteMessage);
+
 router.get('/date/:id',pollController.getVotePage);
 router.post('/date/:id',pollController.postVotePage);
 

@@ -34,11 +34,12 @@
 
 .account-settings .about h5 {
   margin: 0 0 15px 0;
-  color: #007ae1;
+  color: #FF7B01;
 }
 
 .account-settings .about p {
   font-size: 0.825rem;
+  font-weight:bold;
 }
 
 .form-control {

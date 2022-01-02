@@ -15,13 +15,13 @@
 
     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active"  id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Kullanıcı Bİlgisi</button>
+          <button class="nav-link active"  id="home-tab"  style="color:#78797a!important; font-weight:bold;" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Kullanıcı Bilgisi</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link"  id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Şifre</button>
+          <button class="nav-link"  id="profile-tab" style="color:#78797a!important; font-weight:bold;"data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Şifre</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link"  id="password-tab" data-bs-toggle="tab" data-bs-target="#password" type="button" role="tab" aria-controls="password" aria-selected="false">E-posta</button>
+            <button class="nav-link"  id="password-tab"  style="color: #78797a!important; font-weight:bold;" data-bs-toggle="tab" data-bs-target="#password" type="button" role="tab" aria-controls="password" aria-selected="false">E-posta</button>
         </li>
 
     </ul>
@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <div class="account-settings">
                                 <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" /></div>
+                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
                                     <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>
@@ -63,17 +63,17 @@
                             <div class="row gutters">
 
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-bottom: 10px;">
-                                    <div class="form-group"><label>Ad</label><input name="firstName" type="text" class="form-control" value="<%- user.firstName %>"  id="firstName" style="border: dashed #0D6EFD 1px; border-radius: 5px;" /></div>
+                                    <div class="form-group"><label>Ad</label><input name="firstName" type="text" class="form-control" value="<%- user.firstName %>"  id="firstName" style="border: dashed #FF7B01 1px; border-radius: 5px;" /></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>Soyad</label><input name="lastName" type="text" class="form-control" value="<%- user.lastName %>"  id="lastName" style="border: dashed #0D6EFD 1px; border-radius: 5px;" /></div>
+                                    <div class="form-group"><label>Soyad</label><input name="lastName" type="text" class="form-control" value="<%- user.lastName %>"  id="lastName" style="border: dashed #FF7B01 1px; border-radius: 5px;" /></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>E-posta</label><input disabled name="email" type="email" class="form-control" value="<%- user.email %>" id="email"  style="border: dashed #0D6EFD 1px; border-radius: 5px;"/></div>
+                                    <div class="form-group"><label>E-posta</label><input disabled name="email" type="email" class="form-control" value="<%- user.email %>" id="email"  style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <% if(user.business!=undefined){ %>
-                                        <div class="form-group"><label>Meslek</label><input name="business" type="text" value="<%- user.business %>"  class="form-control" style="border: dashed #0D6EFD 1px; border-radius: 5px;"/></div>
+                                        <div class="form-group"><label>Meslek</label><input name="business" type="text" value="<%- user.business %>"  class="form-control" style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
                                       <% } else{ %>  
                                         <div class="form-group"><label>Meslek</label><input  name="business" type="text" value="Belirtilmedi" class="form-control"  style="border: dashed #0D6EFD 1px; border-radius: 5px;"/></div>
                                      <% } %>
@@ -82,7 +82,7 @@
         
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <button type="submit" class="btn btn-success" style="margin:15px auto;" href="http://localhost:3000/home/users/profile">Profili Güncelle</button>
+                                        <button type="submit" class="btn btn-success" style="margin:15px auto; background-color: #FF7B01 !important;border-color: #FF7B01;" href="http://localhost:3000/home/users/profile">Profili Güncelle</button>
                                 </div>
                             </div>
                         </form>
@@ -101,7 +101,7 @@
                         <div class="card-body">
                             <div class="account-settings">
                                 <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" /></div>
+                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
                                     <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>
@@ -124,19 +124,19 @@
                             <div class="row gutters">
                                 
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px">
-                                    <div class="form-group"><label>Şifre</label><input name="password" type="password" class="form-control" placeholder="Şifre"  id="passoword"  style="border: dashed #0D6EFD 1px; border-radius: 5px;"/></div>
+                                    <div class="form-group"><label>Şifre</label><input name="password" type="password" class="form-control" placeholder="Şifre"  id="passoword"  style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>Yeni Şifre</label><input name="newPassword" type="password" class="form-control"  placeholder="Yeni Şifre"  id="passoword" style="border: dashed #0D6EFD 1px; border-radius: 5px;" /></div>
+                                    <div class="form-group"><label>Yeni Şifre</label><input name="newPassword" type="password" class="form-control"  placeholder="Yeni Şifre"  id="passoword" style="border: dashed #FF7B01 1px; border-radius: 5px;" /></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>Yeni şifre (Tekrar)</label><input name="repeatPassword" type="password" class="form-control" placeholder="Yeni Şifre (Tekrar)"  id="passoword" style="border: dashed #0D6EFD 1px; border-radius: 5px;" /></div>
+                                    <div class="form-group"><label>Yeni şifre (Tekrar)</label><input name="repeatPassword" type="password" class="form-control" placeholder="Yeni Şifre (Tekrar)"  id="passoword" style="border: dashed #FF7B01 1px; border-radius: 5px;" /></div>
                                 </div>
                             </div>
         
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <button type="submit" class="btn btn-success" style="margin:15px auto" href="http://localhost:3000/home/users/profile">Şifre Güncelle</button>
+                                        <button type="submit" class="btn btn-success" style="margin:15px auto;border-color: #FF7B01!important; background-color: #FF7B01!important;" href="http://localhost:3000/home/users/profile">Şifre Güncelle</button>
                                 </div>
                             </div>
                         </form>
@@ -156,7 +156,7 @@
                         <div class="card-body">
                             <div class="account-settings">
                                 <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" /></div>
+                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
                                     <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>
@@ -179,16 +179,16 @@
                             <div class="row gutters">
                                 
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>Yeni E-Posta</label><input name="email" type="email" class="form-control" placeholder="Yeni E-Posta"  id="email"  style="border: dashed #0D6EFD 1px; border-radius: 5px;"/></div>
+                                    <div class="form-group"><label>Yeni E-Posta</label><input name="email" type="email" class="form-control" placeholder="Yeni E-Posta"  id="email"  style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="form-group"><label>Şifre</label><input name="password" type="password" class="form-control"  placeholder="Şifre" id="password" style="border: dashed #0D6EFD 1px; border-radius: 5px;" /></div>
+                                    <div class="form-group"><label>Şifre</label><input name="password" type="password" class="form-control"  placeholder="Şifre" id="password" style="border: dashed #FF7B01 1px; border-radius: 5px;" /></div>
                                 </div>
                             </div>
         
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <button type="submit" class="btn btn-success" style="margin:15px auto" href="http://localhost:3000/home/users/profile">Email Güncelle</button>
+                                        <button type="submit" class="btn btn-success" style="margin:15px auto;background-color: #FF7B01!important;border-color: #FF7B01!important;" href="http://localhost:3000/home/users/profile">Email Güncelle</button>
                                 </div>
                             </div>
                         </form>
@@ -205,4 +205,4 @@
 </div>
 
 
-<%- include('./partials/footer.ejs') %>  
+<%- include('./partials/footer.ejs') %>

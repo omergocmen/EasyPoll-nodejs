@@ -8,7 +8,7 @@ const Vote=require("../models/voteModel");
 const User=require("../models/userModel");
 const qr=require("qrcode");
 const Comment=require("../models/commentModel");
-const { findByIdAndRemove } = require("../models/pollModel");
+const { findByIdAndRemove, findById } = require("../models/pollModel");
 
 module.exports.getCreatePoll=async function(req,res,next)
 {
@@ -104,7 +104,9 @@ module.exports.postCalenderPage=async function(req,res,next)
 
 module.exports.getVotePage=async function(req,res,next)
 {   
+    
         let votes;
+        let voteId=false
     try {
         const poll=await Poll.findOne({_id:req.params.id});
         const dates=await mDate.find({pollId:poll._id});
@@ -139,10 +141,8 @@ module.exports.getVotePage=async function(req,res,next)
         let comments=await Comment.find({pollId:req.params.id})
         qr.toDataURL(poll.activeLink, (err, src) => {
                 if (err) throw err ;
-                res.render("votePage",{dates,votes,poll,manager,comments,src});
+                res.render("votePage",{dates,votes,poll,manager,comments,src,voteId});
         });
-        
-
     
     } catch (error) {
         res.send("Bir hata oluştu...");
@@ -301,3 +301,106 @@ module.exports.getDeleteMessage=async function(req,res,next)
 
 
 
+
+module.exports.getUpdateVote=async function(req,res,next)
+{   
+    
+    
+    let voteId=req.params.id;
+    let votes;
+    try {
+        let vote =await Vote.findById(req.params.id);
+        let poll=await Poll.findById(vote.pollId);
+        let dates=await mDate.find({pollId:poll._id});
+        if(req.query.mode!=undefined && req.query.mode==="true" && req.tokenUi===poll.ownerId)
+        {
+            poll.mode="true";
+            await poll.save();
+        }
+        else if(req.query.mode!=undefined && req.query.mode==="false" && req.tokenUi===poll.ownerId)
+        {
+            poll.mode="false";
+            await poll.save();
+        }
+        let manager=false;
+        if(req.tokenUi==poll.ownerId)
+        {
+            manager=true;
+        }
+        
+        if(manager==false && poll.mode=="false")
+        {
+             votes=await Vote.find({
+                 pollId:poll.id
+                ,voterId:req.tokenUi
+                })
+        }
+        else
+        {
+             votes=await Vote.find({pollId:poll.id})
+        }
+        
+        let comments=await Comment.find({pollId:poll.id})
+        qr.toDataURL(poll.activeLink, (err, src) => {
+                if (err) throw err ;
+                res.render("votePage",{dates,votes,poll,manager,comments,src,voteId});
+        });
+        
+    } catch (error) {
+        res.send("Bir hata oluştu...");
+    }
+}
+
+module.exports.postUpdateVote=async function(req,res,next)
+{   
+    
+    let vote =await Vote.findById(req.params.id);
+    let poll=await Poll.findById(vote.pollId);
+
+    vote.dates.forEach(async element => {
+            console.log(element);
+            const date = await mDate.findById(element)
+            date.totel=parseInt(date.totel)-1;
+            await date.save();     
+    });
+    
+
+    if(req.body.votes)
+    {
+        console.log("--------------------")
+        if(typeof req.body.votes==="string")
+        {
+            vote.dates=[req.body.votes];
+            await vote.save();
+            vote.dates.forEach(async element => {
+                console.log(element);
+                const date = await mDate.findById(element)
+                console.log(date);
+                date.totel=parseInt(date.totel)+1;
+                await date.save();
+                res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
+            });
+        }
+        else if (typeof req.body.votes==="object")
+        {
+            vote.dates=req.body.votes;
+            await vote.save();
+            vote.dates.forEach(async element => {
+                const date = await mDate.findById(element)
+                date.totel=parseInt(date.totel)+1;
+                await date.save();
+                res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
+            });
+            
+        }
+    }
+    else
+    {
+        vote.dates=[];
+        await vote.save();
+        res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
+    }
+
+    
+
+}

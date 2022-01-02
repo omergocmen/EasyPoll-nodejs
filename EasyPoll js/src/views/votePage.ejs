@@ -3,7 +3,6 @@
 
 
 
-
 <div class="dateSection shadow" style="width:100%;max-width:960px; height:900px;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
 <br>
 <div class="mdl-card mdl-shadow--2dp">
@@ -30,6 +29,7 @@
         </div>
     </div>
 </div>
+
 
 
 <section class="tablee"  style="width: 60%; min-height: 50px;  max-height: 500px;  margin: 20px auto;">
@@ -96,10 +96,62 @@
             </th>
           </tr>
         </thead>
-        <tbody>
-          <form method="post">
-            <% votes.forEach(voteElement => { %>
-              <tr class="tr">
+
+        <% if(!voteId){ %>
+
+          <tbody id="tb">
+            <form method="post">
+              <% votes.forEach(voteElement => { %>
+                <tr class="tr">
+                      <% dates.forEach(dateElement => { %>
+                        <% if(voteElement.dates.includes(dateElement._id)){ %>
+                          <td><i class="fas fa-check"></i></td>
+                        <% } else{ %>  
+                          <td><i class="fas fa-times"></i></td>
+                       <% } %>
+                    <% }) %>
+                    <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
+                    <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
+                </tr>
+              <% }) %>
+              <tr class="oyla">
+              <% dates.forEach(dateElement => { %>
+                <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
+              <% }) %>
+              <th></th>
+              <th><button type="submit"  class="btn btn-success">Oyla</button></th>
+            </tr>
+            <tr>
+              <% dates.forEach(dateElement => { %>
+                <td><i style="font-size: 10px;" class="fas fa-check"></i><%- dateElement.totel %> </td>
+              <% }) %>
+            </tr>
+          </tbody>
+         
+        <% } else{ %>  
+
+
+          <tbody>
+            <form method="post">
+              <% votes.forEach(voteElement => { %>
+                
+                <% if(voteElement.id===voteId){ %>
+            <form method="post">
+                  <tr class="table-success" >
+                    <% dates.forEach(dateElement => { %>
+                      <% if(voteElement.dates.includes(dateElement._id)){ %>
+                        <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox" checked  id="flexCheckDefault"></td>
+                      <% } else{ %>  
+                        <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
+                     <% } %>
+                  <% }) %>
+                  <th><button type="submit"  class="btn btn-success">Güncelle</button></th>
+                  <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
+              </form>
+            </tr>
+
+                <% } else{ %>  
+                  <tr class="tr">
                     <% dates.forEach(dateElement => { %>
                       <% if(voteElement.dates.includes(dateElement._id)){ %>
                         <td><i class="fas fa-check"></i></td>
@@ -107,23 +159,17 @@
                         <td><i class="fas fa-times"></i></td>
                      <% } %>
                   <% }) %>
-                  <td><i  class="fas fa-pencil-alt pencil"></i></td>
+                  <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
                   <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
               </tr>
-            <% }) %>
-            <tr class="oyla">
-            <% dates.forEach(dateElement => { %>
-              <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
-            <% }) %>
-            <th></th>
-            <th><button type="submit"  class="btn btn-success">Oyla</button></th>
-          </tr>
-          <tr>
-            <% dates.forEach(dateElement => { %>
-              <td><i style="font-size: 10px;" class="fas fa-check"></i><%- dateElement.totel %> </td>
-            <% }) %>
-          </tr>
-        </tbody>
+               <% } %>
+              <% }) %>
+          </tbody>
+
+          
+       <% } %>
+
+
       </form>
       </table>
     

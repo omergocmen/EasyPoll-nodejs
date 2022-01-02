@@ -94,3 +94,16 @@
     a.parentElement.parentElement.innerHTML=mhtml;
     
 }
+
+
+
+
+
+
+<tr class="oyla">
+  <% dates.forEach(dateElement => { %>
+    <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
+  <% }) %>
+  <th></th>
+  <th><button type="submit"  class="btn btn-success">Oyla</button></th>
+</tr>

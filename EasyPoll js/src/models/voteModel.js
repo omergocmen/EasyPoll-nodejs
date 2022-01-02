@@ -2,6 +2,7 @@ const mongoose=require("mongoose");
 const bcrypt=require("bcrypt");
 const Schema=mongoose.Schema;
 const jwt=require("jsonwebtoken");
+const mDate=require("./dateModel");
 
 const VoteSchema = new Schema({
     voterId : {
@@ -33,6 +34,17 @@ const VoteSchema = new Schema({
         type:Array
     }
 
+})
+
+
+VoteSchema.pre("save",function(next)
+{    
+    this.dates.forEach(async element => {
+        const date=await mDate.findById(element);
+        date.totel=parseInt(date.totel)+1;
+        const result =await date.save();
+    });
+    next();
 })
 
 

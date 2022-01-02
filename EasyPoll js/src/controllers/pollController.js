@@ -8,7 +8,9 @@ const Vote=require("../models/voteModel");
 const User=require("../models/userModel");
 const qr=require("qrcode");
 const Comment=require("../models/commentModel");
-const { findByIdAndRemove, findById } = require("../models/pollModel");
+
+
+const updateVotes=require("../middleWares/updateVotes");
 
 module.exports.getCreatePoll=async function(req,res,next)
 {
@@ -232,11 +234,7 @@ module.exports.postVotePage=async function(req,res,next)
             voterFirstName:userr[0].firstName,
             voterLastName:userr[0].lastName
         })
-        vote.dates.forEach(async element => {
-            const date=await mDate.findById(element);
-            date.totel=parseInt(date.totel)+1;
-            await date.save();
-        });
+
         const poll=await Poll.findById(req.params.id);
         poll.totelVote=parseInt(poll.totelVote)+1;
         const resultpoll =await poll.save();
@@ -357,41 +355,19 @@ module.exports.postUpdateVote=async function(req,res,next)
     let vote =await Vote.findById(req.params.id);
     let poll=await Poll.findById(vote.pollId);
 
-    vote.dates.forEach(async element => {
-            console.log(element);
-            const date = await mDate.findById(element)
-            date.totel=parseInt(date.totel)-1;
-            await date.save();     
-    });
-    
-
     if(req.body.votes)
     {
-        console.log("--------------------")
         if(typeof req.body.votes==="string")
         {
-            vote.dates=[req.body.votes];
+            vote.dates= [req.body.votes];
             await vote.save();
-            vote.dates.forEach(async element => {
-                console.log(element);
-                const date = await mDate.findById(element)
-                console.log(date);
-                date.totel=parseInt(date.totel)+1;
-                await date.save();
-                res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
-            });
+            res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")   
         }
         else if (typeof req.body.votes==="object")
         {
             vote.dates=req.body.votes;
             await vote.save();
-            vote.dates.forEach(async element => {
-                const date = await mDate.findById(element)
-                date.totel=parseInt(date.totel)+1;
-                await date.save();
-                res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
-            });
-            
+            res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#tb")
         }
     }
     else

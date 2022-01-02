@@ -7,7 +7,7 @@ const verifyControl=require("../middleWares/verifyControl");
 const resetControl=require("../middleWares/resetControl");
 const authorizations=require("../middleWares/authorizations");
 const pollManagerControl=require("../middleWares/pollManagerControl");
-
+const updateVotes=require("../middleWares/updateVotes");
 
 
 router.get('/:id',pollManagerControl,pollController.getCalenderPage);
@@ -23,7 +23,7 @@ router.get('/delete/:id',pollController.getDeletePoll);
 router.get('/deleteMessage/:id',pollController.getDeleteMessage);
 
 router.get('/updateVote/:id',pollController.getUpdateVote);
-router.post('/updateVote/:id',pollController.postUpdateVote);
+router.post('/updateVote/:id',updateVotes,pollController.postUpdateVote);
 
 router.get('/date/:id',pollController.getVotePage);
 router.post('/date/:id',pollController.postVotePage);

@@ -107,3 +107,17 @@
   <th></th>
   <th><button type="submit"  class="btn btn-success">Oyla</button></th>
 </tr>
+
+
+
+
+
+
+
+
+
+// vote.dates.forEach(async element => {
+  //     const date=await mDate.findById(element);
+  //     date.totel=parseInt(date.totel)+1;
+  //     await date.save();
+  // });

@@ -194,7 +194,7 @@ module.exports.postVotePage=async function(req,res,next)
         if(typeof req.body.mail==="string")
         {
             req.flash('info',"danger:Lütfen email girdikten sonra gönder tuşuna basınız emaillerin doğru olduğundan emin olunuz.")
-            res.redirect("/home/createPoll/date/"+req.params.id+"#comment");
+            res.redirect("/home/createPoll/date/"+req.params.id+"#sendemail");
         }
         else if (typeof req.body.mail==="object")
         {
@@ -379,4 +379,12 @@ module.exports.postUpdateVote=async function(req,res,next)
 
     
 
+}
+
+
+module.exports.getDeleteVote=async function(req,res,next){
+    const result=await Vote.findByIdAndRemove(req.params.id);  
+    const poll=await Poll.findById(result.pollId);
+    poll.totelVote=parseInt(poll.totelVote)-1;
+    res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id);
 }

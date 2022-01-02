@@ -110,7 +110,8 @@
                           <td><i class="fas fa-times"></i></td>
                        <% } %>
                     <% }) %>
-                    <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
+                    <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a>
+                      <a style="color: black; margin-left: 10px;" href="http://localhost:3000/home/createPoll/deleteVote/<%- voteElement.id %>"><i class="fas fa-trash"></i></a></td>
                     <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
                 </tr>
               <% }) %>

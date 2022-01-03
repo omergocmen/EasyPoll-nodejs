@@ -1,6 +1,6 @@
 $('.date').datepicker({
     multidate: false,
-    
+    minDate: 0,
     
 });
  const mybtn=document.querySelector(".mybtn");

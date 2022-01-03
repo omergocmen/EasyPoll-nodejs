@@ -1399,8 +1399,8 @@
 			days: ["Pazar" ,"Pazartesi" ,"Salı" ,"Çarşamba" ,"Perşembe" ,"Cuma" ,"Cumartesi"],
 			daysShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmrt", "Paz"],
 			daysMin: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmrt","Paz"],
-			months: ["Ocak", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Ocak", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			months: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+			monthsShort: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
 			today: "Today",
 			clear: "Clear"
 		}

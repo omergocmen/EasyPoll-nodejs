@@ -37,7 +37,12 @@
     <script>
         let dateToday = new Date();
         $('.date').datepicker({
-            multidate: false
+            multidate: false,
+            startDate: '-0m'
+            //endDate: '+2d'
+        }).on('changeDate', function(ev){
+            $('#sDate1').text($('#datepicker').data('date'));
+            $('#datepicker').datepicker('hide');
         });
 
         
@@ -48,8 +53,6 @@
  const clearsButton=document.querySelector(".mybtn-clear");
  const endTime=document.querySelectorAll(".date");
  let comment=document.querySelector(".commentbtn");
- 
-
 
 
 

@@ -27,7 +27,7 @@ module.exports.postCreatePoll=async function(req,res,next)
         const userr=await User.findById(poll.ownerId);
         userr.totelPoll=parseInt(userr.totelPoll)+1;
         const resultuser=await userr.save();
-        poll.activeLink="http://localhost:3000/home/createPoll/"+result.id;
+        poll.activeLink="http://localhost:3000/home/createPoll/settings/"+result.id;
         await poll.save();
         res.redirect("http://localhost:3000/home/createPoll/settings/"+result.id);
     } catch (error) {
@@ -69,18 +69,24 @@ module.exports.postCalenderPage=async function(req,res,next)
         req.flash('info',"En az 2 tarih seçilmelidir.");
         res.redirect("/home/createPoll/"+req.params.id);
     }
+    else if(!req.body.date)
+    {
+        req.flash('info',"En az 2 tarih seçilmelidir.");
+        res.redirect("/home/createPoll/"+req.params.id);
+    }
     else
     {
         const result=await mDate.find({pollId:req.params.id});
-    result.forEach(async element => {
+        result.forEach(async element => {
         const removedElement=await mDate.findByIdAndRemove(element._id);
-    });
-    const votes=await Vote.find({pollId:req.params.id});
-    votes.forEach(async element => {
-        const removedElement=await Vote.findByIdAndRemove(element._id);
-    });
+        });
 
-    try {
+        const votes=await Vote.find({pollId:req.params.id});
+        votes.forEach(async element => {
+        const removedElement=await Vote.findByIdAndRemove(element._id);
+        });
+
+        try {
         for (let index = 0; index <req.body.date.length; index++) {
             const date=await new mDate({
                 pollId:req.params.id,
@@ -458,7 +464,16 @@ module.exports.getDeleteVote=async function(req,res,next){
 
 module.exports.getSettings=async function(req,res,next)
 {
-    res.render("settings");
+    let poll=await Poll.findById(req.params.id);
+    if(poll.activeLink=="http://localhost:3000/home/createPoll/settings/"+req.params.id)
+    {
+        res.render("settings");
+    }
+    else
+    {
+        res.redirect(poll.activeLink);
+    }
+    
 }
 
 
@@ -466,7 +481,6 @@ module.exports.postSettings=async function(req,res,next)
 {
 
     let poll=await Poll.findById(req.params.id);
-
     if(typeof req.body.set=="string" )
     {
         if(req.body.set!="")
@@ -478,7 +492,6 @@ module.exports.postSettings=async function(req,res,next)
     }
     else
     {
-        
 
         if(req.body.set.includes('oneVote'))
         {
@@ -517,6 +530,8 @@ module.exports.postSettings=async function(req,res,next)
             await poll.save();
         }
     }
+    poll.activeLink="http://localhost:3000/home/createPoll/"+req.params.id;
+    await poll.save();
     res.redirect("http://localhost:3000/home/createPoll/"+req.params.id);
     
 }

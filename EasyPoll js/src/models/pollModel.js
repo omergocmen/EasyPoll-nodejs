@@ -61,6 +61,10 @@ const PollSchema = new Schema({
     endTime:{
         type:String,
         default:"none"
+    },
+    sendMail:{
+        type:String,
+        default:false
     }
 
 })

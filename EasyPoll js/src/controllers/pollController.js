@@ -185,6 +185,13 @@ module.exports.postVotePage=async function(req,res,next)
                     }
                 )
                 await comment.save();
+                let poll=await Poll.findById(req.params.id);
+                if(poll.sendMail=="true")
+                {
+                    let pollmanager=await User.findById(poll.ownerId);
+                    let message=user.firstName+" "+user.lastName+" kullanıcısı "+poll.title+" anketine yorum yaptı"
+                    sendMailToUser(message,pollmanager.email);
+                }
             }
             res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#comment")
         }
@@ -261,6 +268,12 @@ module.exports.postVotePage=async function(req,res,next)
                 poll.totelVote=parseInt(poll.totelVote)+1;
                 const resultpoll =await poll.save();
                 const result=await vote.save();
+                if(poll.sendMail=="true")
+                {
+                    const pollmanager=await User.findById(poll.ownerId);
+                    const message=pollmanager.firstName+" "+pollmanager.lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı";
+                    sendMailToUser(message,pollmanager.email);
+                }
                 res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
             }
             else
@@ -283,10 +296,14 @@ module.exports.postVotePage=async function(req,res,next)
             poll.totelVote=parseInt(poll.totelVote)+1;
             const resultpoll =await poll.save();
             const result=await vote.save();
+            if(poll.sendMail=="true")
+            {
+                const pollmanager=await User.findById(poll.ownerId);
+                let message=userr[0].firstName+" "+userr[0].lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı";
+                sendMailToUser(message,pollmanager.email);
+            }
+            
             res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
-
-
-
         }
 
     }
@@ -461,6 +478,8 @@ module.exports.postSettings=async function(req,res,next)
     }
     else
     {
+        
+
         if(req.body.set.includes('oneVote'))
         {
             poll.oneVote="true"
@@ -471,6 +490,19 @@ module.exports.postSettings=async function(req,res,next)
             poll.oneVote="false"
             await poll.save();
         }
+
+
+        if(req.body.set.includes('mail'))
+        {
+            poll.sendMail="true"
+            await poll.save();
+        }
+        else
+        {
+            poll.sendMail="false"
+            await poll.save();
+        }
+        
         if(req.body.set.includes('oneDate')){
             poll.oneDate="true"
             await poll.save();
@@ -487,4 +519,24 @@ module.exports.postSettings=async function(req,res,next)
     }
     res.redirect("http://localhost:3000/home/createPoll/"+req.params.id);
     
+}
+
+ function sendMailToUser(message,email) {
+    let transporter= nodemailer.createTransport({
+        service:'gmail',
+        auth:{
+            user:"nodejsdeneme4@gmail.com",
+            pass:"omer125963"
+        }
+    });
+
+     transporter.sendMail({
+        from:"EasyPoll Anket Uygulaması <info@nodejsuygulama.com",
+        to:email,
+        subject:"Anket hakkında hareketlilik",
+        text:message
+    },(error,info)=>{
+        transporter.close();
+    });
+
 }

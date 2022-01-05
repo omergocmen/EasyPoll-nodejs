@@ -88,7 +88,9 @@
       <div class="inSection" style="text-align: center;">
         <br>
         <h3><%- poll.title.toUpperCase("tr") %> </h3>
+          <h6>LOKASYON: <%- poll.location %> </h6>
         <h6><%- poll.description %> </h6>
+
       </div>
  
 </section>
@@ -222,7 +224,7 @@
                       <td><input class="form-check-input" value=<%- dateElement._id %> type="radio" name="votes" id="flexRadioDefault1"></td>
                       <% }) %>
                       <th></th>
-                      <th><button type="submit"  class="btn btn-success">Oyla</button></th>
+                      <th><button type="submit"  style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" class="btn btn-success">Oyla</button></th>
                     </tr>
 
 
@@ -236,7 +238,7 @@
                     <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
                     <% }) %>
                     <th></th>
-                    <th><button type="submit"  class="btn btn-success">Oyla</button></th>
+                    <th><button type="submit" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px"  class="btn btn-success">Oyla</button></th>
                   </tr>
                 <% } %>
 
@@ -269,7 +271,7 @@
                               <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="radio"  id="flexRadioDefault1"></td>
                           <% } %>
                         <% }) %>
-                        <th><button type="submit"  class="btn btn-success">Güncelle</button></th>
+                        <th><button type="submit" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" class="btn btn-success">Güncelle</button></th>
                         <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
                     </tr>
                     
@@ -283,7 +285,7 @@
                               <td><input name="votes" value=<%- dateElement._id %>  class="form-check-input" type="checkbox"  id="flexCheckDefault"></td>
                           <% } %>
                         <% }) %>
-                        <th><button type="submit"  class="btn btn-success">Güncelle</button></th>
+                        <th><button type="submit"  style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" class="btn btn-success">Güncelle</button></th>
                         <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
                     </tr>
 
@@ -358,19 +360,20 @@
 
 
           <div class="accordion" id="accordionExample">
-            <div class="accordion-item" style="background-color: #6C757D;">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="btn btn-success collapsed" style="width: auto; margin: 5px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo<%- index%>" aria-expanded="true" aria-controls="collapseOne">
+            <div class="accordion-item" style="background-color: #f2f2f2;">
+              <h2 class="accordion-header" style="color: #000000" id="headingTwo">
+                <button class="btn btn-success collapsed" style="background-color:#FF7B01; border-color: #FF7B01; margin-top: 2px; margin-bottom: 3px; color:white;width: auto; min-width:100px;margin-left:3px" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo<%- index%>" aria-expanded="true" aria-controls="collapseOne">
                   Yanıtla
                   </button>
               </h2>
+
               <div id="collapseTwo<%- index%>" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                 
                   <form method="post">
                     <input type="text" style="visibility: hidden;" readonly name="comment" value="<%- element.id %> " id="">
                     <textarea class="form-control mb-3 control" required name="comment" placeholder="Yorumlarınız Yazınız." id="floatingTextarea2" style="height: 100px"></textarea>
-                    <button class="btn btn-success commentbtn"  type="submit">Yorum Yap</button>
+                    <button class="btn btn-success commentbtn" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px"  type="submit">Yorum Yap</button>
                   </form>
 
                 </div>
@@ -384,7 +387,7 @@
     <form method="post">
       <input type="text" style="visibility: hidden;" readonly name="comment" value="comment" id="">
       <textarea class="form-control mb-3 control" required name="comment" placeholder="Yorumlarınız Yazınız." id="floatingTextarea2" style="height: 100px"></textarea>
-      <button class="btn btn-success commentbtn"  type="submit">Yorum Yap</button>
+      <button class="btn btn-success commentbtn" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" type="submit">Yorum Yap</button>
     
     </form>
   </div>
@@ -423,6 +426,7 @@
                 <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" onclick="copyBox()" type="button">Kopyala</button><button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px; margin-left: 2px" id="paylas" onclick="share()" type="button">Paylaş</button>
             </div>
         </div>
+        <br>
         <br>
     </div>
   </div>
@@ -468,7 +472,7 @@
                                 <a href="javascript:void(0);" class="float-right remove-todo-item"><i class="icon-close"></i></a>
                             </div>
                         </div>
-                        <button class="btn btn-success" type="submit">Gönder</button>
+                        <button class="btn btn-success" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" type="submit">Gönder</button>
                       </form>
                     </div>
                 </div>

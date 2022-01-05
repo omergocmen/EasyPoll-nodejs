@@ -152,7 +152,25 @@ module.exports.getVotePage=async function(req,res,next)
 
 module.exports.postVotePage=async function(req,res,next)
 {
-    if(req.body.comment)
+    
+    if(req.body.setDate!=undefined)
+    {
+        let poll=await Poll.findById(req.params.id);
+        if(req.body.setDate)
+        {
+            poll.endTime=req.body.setDate;
+            await poll.save();
+        }
+        else
+        {
+            poll.endTime="none"
+            await poll.save();
+        }
+
+        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
+        
+    }
+    else if(req.body.comment)
     {
         if(req.body.comment[0]=="comment")
         {

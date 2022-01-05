@@ -45,6 +45,19 @@
             $('#datepicker').datepicker('hide');
         });
 
+
+
+        $('.end').datepicker({
+            multidate: false,
+            startDate: '-0m',
+            format: 'dd.mm.yyyy',
+            //endDate: '+2d'
+        }).on('changeDate', function(ev){
+            $('#sDate1').text($('#datepicker').data('date'));
+            $('#datepicker').datepicker('hide');
+        });
+
+
         
  const mybtn=document.querySelector(".mybtn");
  const myInput=document.querySelector(".date");

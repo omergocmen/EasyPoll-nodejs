@@ -5,11 +5,11 @@
 <div class="container-sm" style="width: 60%;  margin-top: 120px;">
   <form method="post">
 <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
-  <br>
+<br>
   <div class="mdl-card mdl-shadow--2dp">
   <div class="mdl-card__supporting-text">
     <div class="mdl-stepper-horizontal-alternative">
-      <div class="mdl-stepper-step active-step ">
+      <div class="mdl-stepper-step active ">
         <div class="mdl-stepper-circle"><span>1</span></div>
         <div class="mdl-stepper-title">Etkinlik Oluştur</div>
         <div class="mdl-stepper-bar-left"></div>
@@ -38,20 +38,34 @@
 </div>
 
 <div class="container-sm" style="width: 65%; min-height: 500px; margin-top: 50px;">
-  <form method="post" action="/home/createPoll">
-
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Başlık</label>
-    <input name="title" type="text" placeholder="Lütfen toplantının başlığını giriniz." class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Açıklama</label>
-    <input name="description" placeholder="Fonksiyonel" type="text" class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Lokasyon</label>
-    <textarea name="location" placeholder="Fonksiyonel" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
+  <form method="post">
+  <div>
+    <div class="card" style="border: 1px solid black;">
+        <div class="card-body">
+            <h4 class="card-title">Tekli Oy Kullanma</h4>
+            <p class="card-text">Kullanıcıları tek oy kullanmayla sınırlandır.</p>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="set" value="oneVote" type="checkbox" role="switch" id="flexSwitchCheckDefault set">
+              </div>
+        </div>
+    </div>
+    <div class="card" style="border: 1px solid black;">
+        <div class="card-body">
+            <h4 class="card-title">Tekli Tarih Seçme</h4>
+            <p class="card-text">Kullanıcılar yalnızca bir tarih için oy verebilir.</p>
+            <div class="form-check form-switch">
+                <input class="form-check-input " name="set" value="oneDate" type="checkbox" role="switch" id="flexSwitchCheckDefault set" >
+              </div>
+        </div>
+    </div>
+    <div class="card" style="border: 1px solid black;">
+        <div class="card-body">
+            <h4 class="card-title">Bitiş Tarihi Seç</h4>
+            <p class="card-text">Anket için bir oy kullanma bitiş tarihi seçebilirsiniz (fonksiyonel)</p>
+            <input type="text" name="set"  class="form-control end" readonly id="inputDate set">
+        </div>
+    </div>
+</div>
 
 <% message.forEach(element => { %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">

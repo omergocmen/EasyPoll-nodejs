@@ -29,7 +29,7 @@ module.exports.postCreatePoll=async function(req,res,next)
         const resultuser=await userr.save();
         poll.activeLink="http://localhost:3000/home/createPoll/"+result.id;
         await poll.save();
-        res.redirect("/home/createPoll/"+result._id);
+        res.redirect("http://localhost:3000/home/createPoll/settings/"+result.id);
     } catch (error) {
         let errorArray=[];
             error.message.replace("Poll validation failed:","").split(",").forEach(element => {
@@ -106,9 +106,8 @@ module.exports.postCalenderPage=async function(req,res,next)
 
 module.exports.getVotePage=async function(req,res,next)
 {   
-    
-        let votes;
-        let voteId=false
+    let votes;
+    let voteId=false
     try {
         const poll=await Poll.findOne({_id:req.params.id});
         const dates=await mDate.find({pollId:poll._id});
@@ -226,20 +225,52 @@ module.exports.postVotePage=async function(req,res,next)
     else
     {
         
-        const userr=await User.find({_id:req.tokenUi});
-        const vote= await new Vote({
-            pollId:req.params.id,
-            voterId:userr[0]._id,
-            dates:req.body.votes,
-            voterFirstName:userr[0].firstName,
-            voterLastName:userr[0].lastName
-        })
-
         const poll=await Poll.findById(req.params.id);
-        poll.totelVote=parseInt(poll.totelVote)+1;
-        const resultpoll =await poll.save();
-        const result=await vote.save();
-        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
+        if(poll.oneVote=="true")
+        {
+            const votes=await Vote.find({pollId:req.params.id,voterId:req.tokenUi})
+            if(votes.length==0)
+            {
+                const userr=await User.find({_id:req.tokenUi});
+                const vote= await new Vote({
+                    pollId:req.params.id,
+                    voterId:userr[0]._id,
+                    dates:req.body.votes,
+                    voterFirstName:userr[0].firstName,
+                    voterLastName:userr[0].lastName
+                })
+        
+                poll.totelVote=parseInt(poll.totelVote)+1;
+                const resultpoll =await poll.save();
+                const result=await vote.save();
+                res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
+            }
+            else
+            {
+                res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
+            }
+
+        }
+        else
+        {
+            const userr=await User.find({_id:req.tokenUi});
+            const vote= await new Vote({
+                pollId:req.params.id,
+                voterId:userr[0]._id,
+                dates:req.body.votes,
+                voterFirstName:userr[0].firstName,
+                voterLastName:userr[0].lastName
+            })
+    
+            poll.totelVote=parseInt(poll.totelVote)+1;
+            const resultpoll =await poll.save();
+            const result=await vote.save();
+            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
+
+
+
+        }
+
     }
     
 }
@@ -387,4 +418,55 @@ module.exports.getDeleteVote=async function(req,res,next){
     const poll=await Poll.findById(result.pollId);
     poll.totelVote=parseInt(poll.totelVote)-1;
     res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id);
+}
+
+
+module.exports.getSettings=async function(req,res,next)
+{
+    res.render("settings");
+}
+
+
+module.exports.postSettings=async function(req,res,next)
+{
+
+    let poll=await Poll.findById(req.params.id);
+
+    if(typeof req.body.set=="string" )
+    {
+        if(req.body.set!="")
+        {
+            poll.endTime=req.body.set;
+            await poll.save();
+        }
+
+    }
+    else
+    {
+        if(req.body.set.includes('oneVote'))
+        {
+            poll.oneVote="true"
+            await poll.save();
+        }
+        else
+        {
+            poll.oneVote="false"
+            await poll.save();
+        }
+        if(req.body.set.includes('oneDate')){
+            poll.oneDate="true"
+            await poll.save();
+        }
+        else{
+            poll.oneDate="false"
+            await poll.save();
+        }
+        if(req.body.set[req.body.set.length-1]!="")
+        {
+            poll.endTime=req.body.set[req.body.set.length-1]
+            await poll.save();
+        }
+    }
+    res.redirect("http://localhost:3000/home/createPoll/"+req.params.id);
+    
 }

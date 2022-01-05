@@ -45,6 +45,22 @@ const PollSchema = new Schema({
     mode:{
         type:String,
         default:true
+    },
+    limit:{
+        type:String,
+        default:true
+    },
+    oneVote:{
+        type:String,
+        default:false
+    },
+    oneDate:{
+        type:String,
+        default:false
+    },
+    endTime:{
+        type:String,
+        default:"none"
     }
 
 })

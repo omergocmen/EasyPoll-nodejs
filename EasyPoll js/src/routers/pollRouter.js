@@ -10,6 +10,9 @@ const pollManagerControl=require("../middleWares/pollManagerControl");
 const updateVotes=require("../middleWares/updateVotes");
 
 
+
+
+
 router.get('/:id',pollManagerControl,pollController.getCalenderPage);
 router.post('/:id',pollManagerControl,pollController.postCalenderPage);
 
@@ -33,6 +36,10 @@ router.post('/date/:id',pollController.postVotePage);
 
 router.get('/edit/:id',pollController.getEditPoll);
 router.post('/edit/:id',pollController.postEditPoll);
+
+
+router.get('/settings/:id',pollController.getSettings);
+router.post('/settings/:id',pollController.postSettings);
 
 
 module.exports=router;

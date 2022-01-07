@@ -100,6 +100,7 @@ module.exports.postCalenderPage=async function(req,res,next)
         }
         const poll=await Poll.findById(req.params.id);
         poll.activeLink="http://localhost:3000/home/createPoll/date/"+req.params.id;
+        poll.isActive="Şuan Aktif."
         await poll.save();
         res.redirect("/home/createPoll/date/"+req.params.id);
         
@@ -324,17 +325,24 @@ module.exports.getEditPoll=async function(req,res,next)
 
 module.exports.postEditPoll=async function(req,res,next)
 {   
-
-        const result=await Poll.findByIdAndUpdate(req.params.id,{title:req.body.title,description:req.body.description,location:req.body.location});
-        const dates=await mDate.find({pollId:req.params.id})
-        if(dates.length>0)
-        {
-            res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+        if(req.body.title==""){
+            req.flash('info','Başlık boş geçilemez');
+            res.redirect("http://localhost:3000/home/createPoll/edit/"+req.params.id)
         }
         else
         {
-            res.redirect("http://localhost:3000/home/createPoll/"+req.params.id);
+            const result=await Poll.findByIdAndUpdate(req.params.id,{title:req.body.title,description:req.body.description,location:req.body.location});
+            const dates=await mDate.find({pollId:req.params.id})
+            if(dates.length>0)
+            {
+                res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+            }
+            else
+            {
+                res.redirect("http://localhost:3000/home/createPoll/"+req.params.id);
+            }
         }
+
     
 }
 
@@ -554,4 +562,13 @@ module.exports.postSettings=async function(req,res,next)
         transporter.close();
     });
 
+}
+module.exports.getTerminate=async function(req,res,next)
+{
+    let poll=await Poll.findById(req.params.id);
+    poll.isActive="Anket Oylamaya Kapatıldı."
+    poll.endTime="none"
+    await poll.save();
+    res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
+    
 }

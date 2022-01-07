@@ -1,8 +1,6 @@
 <%- include('./partials/navbar.ejs') %>
 
 
-
-
 <div class="dateSection shadow" style="width:100%;max-width:960px; height:900px;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
   <br>
   <div class="mdl-card mdl-shadow--2dp">
@@ -72,6 +70,7 @@
         <input type="text" name="setDate"  class="form-control end" readonly id="inputDate set">
       </div>
       <div class="modal-footer">
+        <a type="button"  class="btn btn-danger" href="http://localhost:3000/home/createPoll/terminate/<%- dates[0].pollId %>">Anketi Sonlandır</a>
         <button type="submit" class="btn btn-success">Güncelle</button>
       </div>
     </div>
@@ -90,9 +89,15 @@
       </div>
  
 </section>
-<section class="tablee" id="votes" style="width: 70%; min-height: 400px; max-height: 500px; overflow: auto; margin: 50px auto;">
+<section class="tablee" id="votes" style="width: 80%; min-height: 400px; max-height: 500px; overflow: auto; margin: 50px auto;">
    
     <table class="table" id="tbl_exporttable_to_xls">
+      <% if (locals.prop !="") { %>
+        <div class="alert alert-<%- locals.prop[0].split(":")[0] %> alert-dismissible fade show" role="alert" style="text-align: center;">
+            <b><%- locals.prop[0].split(":")[1] %></b>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      <% } %>  
       <%let dead=new Date(Date.now()).toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric'}) <= poll.endTime  %>
       <% if (!dead) { %>
         <div class="alert alert-warning d-flex align-items-center" role="alert">
@@ -103,10 +108,39 @@
             Anket oylama süresi dolmuştur oy  <b class="text-decoration-underline">eklenemez , silinemez, düzenlenemez</b>
           </div>
         </div>
-
-
-       
       <% } %>
+      
+      
+      <% if (poll.isActive=="Anket Oylamaya Kapatıldı.") { %>
+            <% dead=false %> 
+
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+              <div>
+                <%- poll.isActive %>  
+              </div>
+            </div>
+
+      <% } %>
+
+
+        <% if (dead) { %>
+          <% if (poll.oneDate=="true") { %>
+            <li class="list-group-item list-group-item-warning">  Yanlızca tek tarih seçilebilir.<i style="float: right;" class="fas fa-exclamation-circle"></i></li>
+          <% } %>
+          <% if (poll.oneVote=="true") { %>
+            <li class="list-group-item list-group-item-warning">Yanlızca tek oy kullanılabilir.<i style="float: right;" class="fas fa-exclamation-circle"></i></li>
+          <% } %>
+          <% if (poll.mode=="false") { %>
+            <li class="list-group-item list-group-item-warning">  Anket şuan için anonimdir.<i style="float: right;" class="fas fa-exclamation-circle"></i></li>
+          <% } %>
+        
+        <% } %>
+        
+
+
       <% if (poll.endTime!="none") { %>
         <div class="alert alert-warning d-flex align-items-center" role="alert">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">

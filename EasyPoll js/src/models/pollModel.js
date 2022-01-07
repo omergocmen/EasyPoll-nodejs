@@ -23,7 +23,8 @@ const PollSchema = new Schema({
         // ,required:[true,"Meslek veya faaliyet bilgisini girmek zorunludur."]
     },
     isActive : {
-        type : Boolean
+        type : String,
+        default:"Anket adımlarında."
         // ,required:[true,"Meslek veya faaliyet bilgisini girmek zorunludur."]
     }
     ,

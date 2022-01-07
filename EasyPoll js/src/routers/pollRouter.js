@@ -34,6 +34,10 @@ router.get('/deleteVote/:id',updateVotes,pollController.getDeleteVote);
 router.get('/date/:id',pollController.getVotePage);
 router.post('/date/:id',pollController.postVotePage);
 
+
+router.get('/terminate/:id',pollController.getTerminate);
+
+
 router.get('/edit/:id',pollController.getEditPoll);
 router.post('/edit/:id',pollController.postEditPoll);
 

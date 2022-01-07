@@ -28,7 +28,7 @@
                         <th scope="col"><%- element.description %> </th>
                         <th scope="col"><%- user.firstName %> <%- user.lastName %></th>
                         <th scope="col"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></th>
-                        <th scope="col">Henüz sonlanmadı</th>
+                        <th scope="col"><%- element.isActive %> </th>
                         <th scope="col"><%- element.totelVote %> </th>
                     </tr>
                     <% index=index+1 %> 

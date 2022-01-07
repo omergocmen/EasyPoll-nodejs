@@ -52,6 +52,7 @@ app.use(flash());
 app.use((req,res,next)=>{
     res.locals.data=req.flash('data')[0];
     res.locals.message=req.flash('info'); 
+    res.locals.prop=req.flash('prop'); 
     res.locals.auth="";
     next();
 })

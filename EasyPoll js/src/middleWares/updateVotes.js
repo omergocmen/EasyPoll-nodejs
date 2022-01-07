@@ -15,6 +15,7 @@ const updateVotes=async (req,res,next)=>{
     }
     else
     {
+        req.flash('prop',"warning:Yanlızca oyu kullanan kişi üzerinde değişiklik yapabilir");
         res.redirect("http://localhost:3000/home/createPoll/date/"+vote.pollId);
     }
 

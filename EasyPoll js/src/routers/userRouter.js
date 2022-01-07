@@ -20,6 +20,7 @@ router.post('/profile',userController.postProfilePage);
 router.get('/verify',verifyControl,userController.getVerify);
 
 router.get('/polls',userController.getPolls);
+router.post('/polls',userController.postSearchPolls);
 
 router.get('/reset',resetControl,userController.getResetPassword);
 router.post('/reset',userController.postResetPassword); 

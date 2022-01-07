@@ -363,6 +363,64 @@ module.exports.postProfilePage=async function(req,res,next)
 module.exports.getPolls=async function(req,res,next)
 {
     const user=await User.findById(req.tokenUi);
-    const polls=await Poll.find({ownerId:req.tokenUi}).sort({'createdAt':-1});
-    res.render("polls",{polls,user});
+
+    if(req.query.search!="" && req.query.search!=undefined)
+    {
+        let value=req.query.search;
+        const count=await Poll.find({
+            $or: [
+            { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
+            { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }
+          ]
+        });
+        const index=Math.ceil(count.length/15);
+        const pageOptions = {
+            page: parseInt(req.query.page) || 0,
+            limit: parseInt(req.query.limit) || 15,
+            index,
+            value,
+            url:"users/polls"
+        }
+        Poll.find({
+            $or: [
+            { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
+            { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }
+             ]
+            })
+            .sort({'createdAt':-1})
+            .skip(pageOptions.page * pageOptions.limit)
+            .limit(pageOptions.limit)
+            .exec(function (err, polls) {
+                if(err) { res.status(500).json(err); return; };
+                res.render('polls',{polls,user,pageOptions});
+            });
+
+    }
+    else
+    {
+        const count=(await Poll.find({})).length;
+        const index=Math.ceil(count/15);
+        const pageOptions = {
+            page: parseInt(req.query.page) || 0,
+            limit: parseInt(req.query.limit) || 15,
+            index,
+            url:"users/polls"
+        }
+        Poll.find()
+            .sort({'createdAt':-1})
+            .skip(pageOptions.page * pageOptions.limit)
+            .limit(pageOptions.limit)
+            .exec(function (err, polls) {
+                if(err) { res.status(500).json(err); return; };
+                res.render('polls',{polls,user,pageOptions});
+            });
+    }
+}
+
+
+module.exports.postSearchPolls=async function(req,res,next)
+{
+    res.redirect('/home/users/polls?search='+req.body.search);
 }

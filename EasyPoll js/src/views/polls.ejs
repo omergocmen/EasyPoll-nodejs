@@ -3,6 +3,16 @@
 
 <section class="polls" style="width: 70%; margin:120px auto ;">
 
+  <div class="search" >
+    <form class="d-flex" method="post" style="justify-content: flex-end;" >
+      <input id="search" style="width: 200px;" name="search" class="form-control me-2" type="text" placeholder="Anket Ara...">
+      <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+  </form>       
+  </div>
+  <br>
+
+
+
     <table class="table">
         <thead>
           <tr>
@@ -40,6 +50,8 @@
         </tbody>
       </table>
 </section>
-
+<div style="width: 80%; margin: auto;">
+  <%- include('./partials/pagination.ejs') %> 
+</div>
 
 <%- include('./partials/footer.ejs') %>  

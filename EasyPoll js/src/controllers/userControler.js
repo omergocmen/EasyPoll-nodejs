@@ -338,9 +338,8 @@ module.exports.postProfilePage=async function(req,res,next)
                     } catch (error) {
                         if(error)
                         {
-                            console.log("Buraya geliyor mu");
+                            console.log(error.message);
                         }
-                        
                         req.flash('info', 'danger:Email formatında yazılmalıdır.');
                         res.redirect("http://localhost:3000/home/users/profile");
                     }
@@ -371,7 +370,8 @@ module.exports.getPolls=async function(req,res,next)
             $or: [
             { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
             { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } },
+            { ownerId: req.tokenUi }
           ]
         });
         const index=Math.ceil(count.length/15);
@@ -386,7 +386,8 @@ module.exports.getPolls=async function(req,res,next)
             $or: [
             { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
             { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } },
+            { ownerId: req.tokenUi }
              ]
             })
             .sort({'createdAt':-1})
@@ -400,7 +401,7 @@ module.exports.getPolls=async function(req,res,next)
     }
     else
     {
-        const count=(await Poll.find({})).length;
+        const count=(await Poll.find({ownerId:req.tokenUi})).length;
         const index=Math.ceil(count/15);
         const pageOptions = {
             page: parseInt(req.query.page) || 0,
@@ -408,7 +409,7 @@ module.exports.getPolls=async function(req,res,next)
             index,
             url:"users/polls"
         }
-        Poll.find()
+        Poll.find({ownerId:req.tokenUi})
             .sort({'createdAt':-1})
             .skip(pageOptions.page * pageOptions.limit)
             .limit(pageOptions.limit)

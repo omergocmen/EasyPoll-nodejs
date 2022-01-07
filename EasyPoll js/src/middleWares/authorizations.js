@@ -7,7 +7,7 @@ const getAccessToRoute=(req,res,next)=>{
         next()
 
     } catch (error) {
-        req.flash('info', 'Anket oluşturmak için giriş yapmanız gerekir.');
+        req.flash('info', 'Oturum sonlandı veya zaman aşımına uğradı lütfen giriş yapınız.');
         res.redirect("http://localhost:3000/home/users/logIn");
     }
     

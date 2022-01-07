@@ -105,7 +105,7 @@ module.exports.postCalenderPage=async function(req,res,next)
         res.redirect("/home/createPoll/date/"+req.params.id);
         
     } catch (error) {
-        res.send("İşlem başarısız");
+        res.render("errPage");
     }
     }
 }
@@ -153,7 +153,7 @@ module.exports.getVotePage=async function(req,res,next)
         });
     
     } catch (error) {
-        res.send("Bir hata oluştu...");
+        res.render("errPage")
     }
 }
 
@@ -364,17 +364,19 @@ module.exports.getDeletePoll=async function(req,res,next)
 module.exports.getDeleteMessage=async function(req,res,next)
 {   
     const comment=await Comment.findById(req.params.id);
-    if(comment.ownerId===req.tokenUi){
-        try {
-            const result =await Comment.findByIdAndRemove(req.params.id);
-            res.redirect("http://localhost:3000/home/createPoll/date/"+result.pollId+"#comment");
-        } catch (error) {
-            res.send("Bir hata oluştu");
+    try {
+
+        if(comment.ownerId===req.tokenUi){
+                const result =await Comment.findByIdAndRemove(req.params.id);
+                res.redirect("http://localhost:3000/home/createPoll/date/"+result.pollId+"#comment");
         }
+        else{
+            res.redirect("http://localhost:3000/home/createPoll/date/"+comment.pollId+"#comment")
+        }
+    } catch (error) {
+        res.render("errPage");
     }
-    else{
-        res.redirect("http://localhost:3000/home/createPoll/date/"+comment.pollId+"#comment")
-    }
+
 }
 
 
@@ -425,7 +427,7 @@ module.exports.getUpdateVote=async function(req,res,next)
         });
         
     } catch (error) {
-        res.send("Bir hata oluştu...");
+        res.render("errPage");
     }
 }
 

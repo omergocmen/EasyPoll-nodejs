@@ -12,14 +12,10 @@ const pollManagerControl=async (req,res,next)=>{
         }
         else
         {
-            res.status(400).json({
-                message:"Bu sayfaya erişmeye yetkiniz yoktur."
-            })
+            res.status(400).render("errPage")
         }
     } catch (error) {
-        res.status(400).json({
-            message:"Bu sayfaya erişmeye yetkiniz yoktur."
-        })
+        res.status(400).render("errPage")
     }
     
 };

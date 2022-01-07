@@ -61,7 +61,7 @@ app.use((req,res,next)=>{
 
 app.use('/home',homeRouter);
 app.use('',(req,res)=>{
-    res.send("404 not found");
+    res.render("errPage");
 });
 
 

@@ -21,7 +21,7 @@ router.post('/:id',pollManagerControl,pollController.postCalenderPage);
 router.get('/',pollController.getCreatePoll);
 router.post('/',pollController.postCreatePoll);
 
-router.get('/delete/:id',pollController.getDeletePoll);
+router.get('/delete/:id',pollManagerControl,pollController.getDeletePoll);
 
 router.get('/deleteMessage/:id',pollController.getDeleteMessage);
 
@@ -35,15 +35,15 @@ router.get('/date/:id',pollController.getVotePage);
 router.post('/date/:id',pollController.postVotePage);
 
 
-router.get('/terminate/:id',pollController.getTerminate);
+router.get('/terminate/:id',pollManagerControl,pollController.getTerminate);
 
 
-router.get('/edit/:id',pollController.getEditPoll);
-router.post('/edit/:id',pollController.postEditPoll);
+router.get('/edit/:id',pollManagerControl,pollController.getEditPoll);
+router.post('/edit/:id',pollManagerControl,pollController.postEditPoll);
 
 
-router.get('/settings/:id',pollController.getSettings);
-router.post('/settings/:id',pollController.postSettings);
+router.get('/settings/:id',pollManagerControl,pollController.getSettings);
+router.post('/settings/:id',pollManagerControl,pollController.postSettings);
 
 
 module.exports=router;

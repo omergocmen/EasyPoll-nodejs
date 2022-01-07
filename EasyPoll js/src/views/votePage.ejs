@@ -80,14 +80,11 @@
 </div>
 
 
-
-
-  
   <form method="post">
       <div class="inSection" style="text-align: center;">
         <br>
         <h3><%- poll.title.toUpperCase("tr") %> </h3>
-          <h6>LOKASYON: <%- poll.location %> </h6>
+          <h6><%- poll.location %> </h6>
         <h6><%- poll.description %> </h6>
 
       </div>
@@ -95,7 +92,7 @@
 </section>
 <section class="tablee" id="votes" style="width: 70%; min-height: 400px; max-height: 500px; overflow: auto; margin: 50px auto;">
    
-    <table class="table">
+    <table class="table" id="tbl_exporttable_to_xls">
       <%let dead=new Date(Date.now()).toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric'}) <= poll.endTime  %>
       <% if (!dead) { %>
         <div class="alert alert-warning d-flex align-items-center" role="alert">
@@ -126,12 +123,12 @@
             <% dates.forEach(element => { %>
                 <th scope="col"><%- element.date %>  <p><b style="font-size: 10px;"><%- element.beginTime %> </b>:<b style="font-size: 10px;"><%- element.endTime %> </b></p> </th>
             <% }) %>
-            <th>Düzenle</th>
+            <th style="text-align: center;"><i class="fas fa-hammer" style="font-size: 20px;"></i></th>
             <th>Oy Kullanan</th>
 
             <% if(dead){ %>
-              <th>
-                <div class="dropdown">
+              <!-- <th id="endSet"> -->
+                <div class="dropdown" style="float: right; margin-right: 10px; margin-top: 10px;">
                   
                   <% if (manager==true) { %>
                     <a class="btn btn-secondary dropdown-toggle" style="border-radius: 10px;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -150,19 +147,24 @@
                       <% } else if(poll.mode=="false") { %>
                         <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/date/<%- dates[0].pollId %>?mode=true">Oyları Herkese Aç</a></li>
                       <% } %>
+                    <li><a class="dropdown-item" type="button"  onclick="ExportToExcel('xlsx')">
+                      Excell çıktısı al
+                    </a></li>
+
                     <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Anketi sil
                     </a></li>
+
                   </ul>
                 </div>
-              </th>
+              <!-- </th> -->
 
 
 
             <% } else{ %>  
               
-              <th>
-                <div class="dropdown">
+              <!-- <th id="endSet"> -->
+                <div class="dropdown" style="float: right; margin-right: 10px; margin-top: 10px;">
                   
                   <% if (manager==true) { %>
                     <a class="btn btn-secondary dropdown-toggle" style="border-radius: 10px;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -175,12 +177,16 @@
                       <% } else if(poll.mode=="false") { %>
                         <li><a class="dropdown-item" href="http://localhost:3000/home/createPoll/date/<%- dates[0].pollId %>?mode=true">Oyları Herkese Aç</a></li>
                       <% } %>
-                    <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+                      <li><a class="dropdown-item" type="button"  onclick="ExportToExcel('xlsx')">
+                        Excell çıktısı al
+                      </a></li>
+                      <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Anketi sil
                     </a></li>
                   </ul>
                 </div>
-              </th>
+              <!-- </th> -->
 
            <% } %>
             
@@ -189,23 +195,23 @@
 
         <% if(!voteId){ %>
 
-          <tbody id="tb">
+          <tbody id="tb" style="background-color: whitesmoke;">
             <form method="post">
               <% votes.forEach(voteElement => { %>
-                <tr class="tr">
+                <tr class="tr" >
                       <% dates.forEach(dateElement => { %>
                         <% if(voteElement.dates.includes(dateElement._id)){ %>
-                          <td><i class="fas fa-check"></i></td>
+                          <td style="background-color: lightgreen;"><i class="fas fa-check"></i><span style="visibility: hidden;">V</span></td>
                         <% } else{ %>  
-                          <td><i class="fas fa-times"></i></td>
+                          <td style="background-color: lightcoral;"><i class="fas fa-times"><span style="visibility: hidden;">X</span></i></td>
                        <% } %>
                     <% }) %>
 
                     <% if(dead){ %>
-                      <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a>
+                      <td style="text-align: center;"><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a>
                         <a style="color: black; margin-left: 10px;" href="http://localhost:3000/home/createPoll/deleteVote/<%- voteElement.id %>"><i class="fas fa-trash"></i></a></td>
                     <% } else{ %>  
-                      <td><a style="color: black;"><i  class="fas fa-pencil-alt pencil"></i></a>
+                      <td style="text-align: center;"><a style="color: black;"><i  class="fas fa-pencil-alt pencil"></i></a>
                         <a style="color: black; margin-left: 10px;"><i class="fas fa-trash"></i></a></td>
                    <% } %>
 
@@ -244,13 +250,14 @@
               <% dates.forEach(dateElement => { %>
                 <td><i style="font-size: 10px;" class="fas fa-check"></i><%- dateElement.totel %> </td>
               <% }) %>
+              <td colspan="2" style="text-align: center;"><b>Onaylanan Toplam Oy</b></td>
             </tr>
           </tbody>
          
         <% } else{ %>  
           
 
-          <tbody>
+          <tbody style="background-color:whitesmoke ; ">
             <form method="post">
               <% votes.forEach(voteElement => { %>
                 
@@ -290,7 +297,7 @@
                     </form>
 
                 <% } else{ %>  
-                  <tr class="tr">
+                  <tr class="tr" style="align-items: center;">
                     <% dates.forEach(dateElement => { %>
                       <% if(voteElement.dates.includes(dateElement._id)){ %>
                         <td><i class="fas fa-check"></i></td>
@@ -298,7 +305,7 @@
                         <td><i class="fas fa-times"></i></td>
                      <% } %>
                   <% }) %>
-                  <td><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
+                  <td style="text-align: center;"><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
                   <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
               </tr>
                <% } %>

@@ -15,8 +15,6 @@ const flash = require('connect-flash');
 
 
 
-
-
 dbConnection.connectDatabase();
 const app=express();
 app.use(express.json());

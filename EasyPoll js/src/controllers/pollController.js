@@ -115,52 +115,68 @@ module.exports.getVotePage=async function(req,res,next)
 {   
     let votes;
     let voteId=false
-    try {
-        const poll=await Poll.findOne({_id:req.params.id});
-        const dates=await mDate.find({pollId:poll._id});
-        if(req.query.mode!=undefined && req.query.mode==="true" && req.tokenUi===poll.ownerId)
-        {
-            poll.mode="true";
-            await poll.save();
-        }
-        else if(req.query.mode!=undefined && req.query.mode==="false" && req.tokenUi===poll.ownerId)
-        {
-            poll.mode="false";
-            await poll.save();
-        }
-        let manager=false;
-        if(req.tokenUi==poll.ownerId)
-        {
-            manager=true;
-        }
+    let poll=await Poll.findOne({_id:req.params.id});
+        try {
+            const dates=await mDate.find({pollId:poll._id});
+            if(req.query.mode!=undefined && req.query.mode==="true" && req.tokenUi===poll.ownerId)
+            {
+                poll.mode="true";
+                await poll.save();
+            }
+            else if(req.query.mode!=undefined && req.query.mode==="false" && req.tokenUi===poll.ownerId)
+            {
+                poll.mode="false";
+                await poll.save();
+            }
+            let manager=false;
+            if(req.tokenUi==poll.ownerId)
+            {
+                manager=true;
+            }
+            
+            if(manager==false && poll.mode=="false")
+            {
+                 votes=await Vote.find({
+                     pollId:req.params.id
+                    ,voterId:req.tokenUi
+                    })
+            }
+            else
+            {
+                 votes=await Vote.find({pollId:req.params.id})
+            }
+            
+            let comments=await Comment.find({pollId:req.params.id})
+            qr.toDataURL(poll.activeLink, (err, src) => {
+                    if (err) throw err ;
+                    res.render("votePage",{dates,votes,poll,manager,comments,src,voteId});
+            });
         
-        if(manager==false && poll.mode=="false")
-        {
-             votes=await Vote.find({
-                 pollId:req.params.id
-                ,voterId:req.tokenUi
-                })
+        } catch (error) {
+            res.render("errPage")
         }
-        else
-        {
-             votes=await Vote.find({pollId:req.params.id})
-        }
-        
-        let comments=await Comment.find({pollId:req.params.id})
-        qr.toDataURL(poll.activeLink, (err, src) => {
-                if (err) throw err ;
-                res.render("votePage",{dates,votes,poll,manager,comments,src,voteId});
-        });
-    
-    } catch (error) {
-        res.render("errPage")
-    }
+
 }
 
 module.exports.postVotePage=async function(req,res,next)
 {
     
-    if(req.body.setDate!=undefined)
+    if(req.body.setPassword!=undefined)
+    {
+        let poll=await Poll.findById(req.params.id);
+        if(req.body.setPassword=="")
+        {
+            poll.password="none";
+        }
+        else
+        {
+            poll.password=req.body.setPassword;
+        }
+        await poll.save();
+        req.flash("prop","success:Şifreleme işlemi başarıyla gerçekleştirildi şifre ile giriş yapmasını istediğiniz kişiler için şifre ile giriş linki anketi şifrele bölümünde oluşturulmuştur.");
+        res.redirect("http://localhost:3000/home/createPoll/date/"+poll.id+"#votes")
+    }
+    else if(req.body.setDate!=undefined)
     {
         let poll=await Poll.findById(req.params.id);
         if(req.body.setDate)
@@ -573,4 +589,27 @@ module.exports.getTerminate=async function(req,res,next)
     await poll.save();
     res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id)
     
+}
+
+
+module.exports.getPollPassword=async function(req,res,next)
+{
+        res.render("pollPassword");
+}
+
+module.exports.postPollPassword=async function(req,res,next)
+{
+
+    let poll =await Poll.findById(req.params.id);
+    console.log(poll.password,req.body.password)
+    if(req.body.password==poll.password)
+    {
+        req.flash('prop','success:Ankete Hoşgeldiniz.')
+        res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id);
+    }  
+    else
+    {
+        req.flash('info','danger:Anket şifresi hatalıdır.')
+        res.redirect("http://localhost:3000/home/createPoll/pollPassword/"+req.params.id);
+    }
 }

@@ -16,6 +16,10 @@ const updateVotes=require("../middleWares/updateVotes");
 router.get('/:id',pollManagerControl,pollController.getCalenderPage);
 router.post('/:id',pollManagerControl,pollController.postCalenderPage);
 
+router.get('/pollPassword/:id',pollController.getPollPassword);
+router.post('/pollPassword/:id',pollController.postPollPassword);
+
+
 
 
 router.get('/',pollController.getCreatePoll);

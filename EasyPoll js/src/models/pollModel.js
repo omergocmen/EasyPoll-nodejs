@@ -66,6 +66,10 @@ const PollSchema = new Schema({
     sendMail:{
         type:String,
         default:false
+    },
+    password:{
+        type:String,
+        default:"none"
     }
 
 })

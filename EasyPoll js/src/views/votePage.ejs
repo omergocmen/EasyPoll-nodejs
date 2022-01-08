@@ -79,13 +79,46 @@
 </div>
 
 
+
+<!-- Anket şifreleme işlemş -->
+
+
+<div class="modal fade" id="sifrele" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form method="post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Anketi Şifrele</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input name="setPassword" type="password" class="form-control" required id="exampleFormControlInput1">  
+      </div>
+      <div class="modal-footer">
+        <div class="input-group">
+          <% if (poll.password!="none") { %>
+            <input type="text" class="form-control" value="http://localhost:3000/home/createPoll/pollPassword/<%- poll._id %>" placeholder="Etkinlik URL" id="url-box1" aria-label="Etkinlik Url" aria-describedby="basic-addon2" readonly>
+            <button class="btn btn-outline-secondary" style="background-color:#FF7B01; border-color: #FF7B01; color:white;" onclick="copyBox1()" type="button">Kopyala</button>
+          <% } %>
+            <button type="submit" class="btn btn-success">Şifrele</button>
+        </div>      
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+
+
+
+
+
   <form method="post">
       <div class="inSection" style="text-align: center;">
         <br>
         <h3><%- poll.title.toUpperCase("tr") %> </h3>
           <h6><%- poll.location %> </h6>
         <h6><%- poll.description %> </h6>
-
       </div>
  
 </section>
@@ -184,6 +217,12 @@
                     <li><a class="dropdown-item" type="button"  onclick="ExportToExcel('xlsx')">
                       Excell çıktısı al
                     </a></li>
+
+                    <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#sifrele">
+                      Anketi Şifrele
+                    </a></li>
+
+
 
                     <li><a class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Anketi sil

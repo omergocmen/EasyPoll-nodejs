@@ -444,7 +444,7 @@ module.exports.postSearchPolls=async function(req,res,next)
 module.exports.getDeleteProfileImage=async function(req,res,next)
 {
     const user =await User.findById(req.tokenUi);
-    
+    fs.unlinkSync(path.resolve(__dirname,"../../public/assets/userImgs/"+req.tokenUi+user.profileImage))
     user.profileImage="default.jpg";
     await user.save();
     req.flash('info','success:Profil resmi başarıyla kaldırıldı');

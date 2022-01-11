@@ -10,7 +10,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
-
+const fileUpload=require("express-fileupload");
 
 
 
@@ -18,7 +18,7 @@ const flash = require('connect-flash');
 dbConnection.connectDatabase();
 const app=express();
 app.use(express.json());
-
+app.use(fileUpload());
 
 
 

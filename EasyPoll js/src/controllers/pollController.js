@@ -209,10 +209,10 @@ module.exports.postVotePage=async function(req,res,next)
                 )
                 await comment.save();
                 let poll=await Poll.findById(req.params.id);
-                if(poll.sendMail=="true")
+                if(poll.sendMail=="true" && req.tokenUi!=poll.ownerId)
                 {
                     let pollmanager=await User.findById(poll.ownerId);
-                    let message=user.firstName+" "+user.lastName+" kullanıcısı "+poll.title+" anketine yorum yaptı"
+                    let message=user.firstName+" "+user.lastName+" kullanıcısı "+poll.title+" anketine yorum yaptı hareketliliği görmek için  http://localhost:3000/home/createPoll/date/"+poll.id+"#comment "
                     sendMailToUser(message,pollmanager.email);
                 }
             }
@@ -257,7 +257,7 @@ module.exports.postVotePage=async function(req,res,next)
                     }
                 });
     
-                await transporter.sendMail({
+                 transporter.sendMail({
                     from:"EasyPoll Anket Uygulaması <info@nodejsuygulama.com",
                     to:req.body.mail[index],
                     subject:userr[0].firstName+" "+userr[0].lastName+" Tarafından bir ankete davet edildiniz.",
@@ -291,10 +291,10 @@ module.exports.postVotePage=async function(req,res,next)
                 poll.totelVote=parseInt(poll.totelVote)+1;
                 const resultpoll =await poll.save();
                 const result=await vote.save();
-                if(poll.sendMail=="true")
+                if(poll.sendMail=="true" && req.tokenUi!=resultpoll.ownerId)
                 {
                     const pollmanager=await User.findById(poll.ownerId);
-                    const message=pollmanager.firstName+" "+pollmanager.lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı";
+                    const message=pollmanager.firstName+" "+pollmanager.lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı hareketliliği görmek için  http://localhost:3000/home/createPoll/date/"+poll.id+"#votes";
                     sendMailToUser(message,pollmanager.email);
                 }
                 res.redirect("http://localhost:3000/home/createPoll/date/"+req.params.id+"#votes");
@@ -319,10 +319,10 @@ module.exports.postVotePage=async function(req,res,next)
             poll.totelVote=parseInt(poll.totelVote)+1;
             const resultpoll =await poll.save();
             const result=await vote.save();
-            if(poll.sendMail=="true")
+            if(poll.sendMail=="true" && req.tokenUi!=resultpoll.ownerId)
             {
                 const pollmanager=await User.findById(poll.ownerId);
-                let message=userr[0].firstName+" "+userr[0].lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı";
+                let message=userr[0].firstName+" "+userr[0].lastName+" kullanıcısı "+poll.title+" anketine bir oy kullandı hareketliliği görmek için  http://localhost:3000/home/createPoll/date/"+resultpoll.id+"#votes";
                 sendMailToUser(message,pollmanager.email);
             }
             
@@ -601,7 +601,6 @@ module.exports.postPollPassword=async function(req,res,next)
 {
 
     let poll =await Poll.findById(req.params.id);
-    console.log(poll.password,req.body.password)
     if(req.body.password==poll.password)
     {
         req.flash('prop','success:Ankete Hoşgeldiniz.')

@@ -7,6 +7,8 @@ const { findByIdAndUpdate } = require("../models/userModel");
 const Poll=require("../models/pollModel");
 const vote=require("../models/voteModel");
 const mDate=require("../models/dateModel");
+const path=require("path");
+const fs=require("fs");
 
 module.exports.getAllUsers=async function(req,res)
 {
@@ -295,10 +297,22 @@ module.exports.getProfilePage=async function(req,res,next)
 
 module.exports.postProfilePage=async function(req,res,next)
 {
+    
+
     if(req.body.password===undefined)
     {
         const result =await User.findByIdAndUpdate(req.tokenUi,{firstName:req.body.firstName,lastName:req.body.lastName,business:req.body.business})
-        req.flash('info',"Başarıyla güncellendi");
+        if(req.files)
+        {
+            if(req.files.image.name.split(".")[1].toLowerCase()=="jpg")
+            {
+                result.profileImage=req.files.image.name;
+                await result.save();
+                let post_image=req.files.image;
+                post_image.mv(path.resolve(__dirname,"../../public/assets/userImgs/",result.id+post_image.name));
+            }
+        }
+        req.flash('info',"success:Başarıyla güncellendi");
         res.redirect("http://localhost:3000/home/users/profile");
     }
     else
@@ -424,4 +438,15 @@ module.exports.getPolls=async function(req,res,next)
 module.exports.postSearchPolls=async function(req,res,next)
 {
     res.redirect('/home/users/polls?search='+req.body.search);
+}
+
+
+module.exports.getDeleteProfileImage=async function(req,res,next)
+{
+    const user =await User.findById(req.tokenUi);
+    
+    user.profileImage="default.jpg";
+    await user.save();
+    req.flash('info','success:Profil resmi başarıyla kaldırıldı');
+    res.redirect("http://localhost:3000/home/users/profile");
 }

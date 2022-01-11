@@ -14,6 +14,10 @@ router.post('/signIn',userController.postSignIn);
 router.get('/logIn',userController.getLogIn);
 router.post('/logIn',userController.postLogIn);
 
+
+
+router.get('/deleteProfileImage',authorizations,userController.getDeleteProfileImage);
+
 router.get('/profile',authorizations,userController.getProfilePage);
 router.post('/profile',authorizations,userController.postProfilePage);
 

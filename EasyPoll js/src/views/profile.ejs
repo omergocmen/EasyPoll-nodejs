@@ -2,16 +2,14 @@
 <%- include('./partials/navbar.ejs') %>  
 
 
-<% if (locals.message !="") { %>
-    <div class="alert alert-<%- locals.message[0].split(":")[0] %> alert-dismissible fade show" role="alert" style="text-align: center;">
-        <b><%- locals.message[0].split(":")[1] %></b>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-<% } %>  
-
 
 <div class="container" style="margin:120px auto;">
-
+    <% if (locals.message !="") { %>
+        <div class="alert alert-<%- locals.message[0].split(":")[0] %> alert-dismissible fade show" role="alert" style="text-align: center;">
+            <b><%- locals.message[0].split(":")[1] %></b>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    <% } %>  
 
     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -34,9 +32,12 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="account-settings">
-                                <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
-                                    <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
+                                <div class="user-profile" style="text-align: center;">
+                                    <% if(user.profileImage=="default.jpg"){ %>
+                                        <img src="/assets/userImgs/default.jpg" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                      <% } else{ %>  
+                                        <img src="/assets/userImgs/<%- user.id %><%- user.profileImage %>" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                     <% } %>                                    <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>
                                 <div class="about">
@@ -59,7 +60,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                     <div class="card h-100">
                         <div class="card-body">
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <div class="row gutters">
 
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-bottom: 10px;">
@@ -71,6 +72,17 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group"><label>E-posta</label><input disabled name="email" type="email" class="form-control" value="<%- user.email %>" id="email"  style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
                                 </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>Resim yükle</label>
+                                        <input  name="image" type="file" class="form-control" value="<%- user.profileImage %>" id="image"  style="border: dashed #FF7B01 1px; border-radius: 5px;"/>
+                                        <% if (user.profileImage!="default.jpg") { %>
+                                        <a href="http://localhost:3000/home/users/deleteProfileImage" type="button" class="btn btn-danger mt-2">Profil Resmini Kaldır</a>
+                                        <% } %>
+                                    </div>
+                                    </div>
+
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <% if(user.business!=undefined){ %>
                                         <div class="form-group"><label>Meslek</label><input name="business" type="text" value="<%- user.business %>"  class="form-control" style="border: dashed #FF7B01 1px; border-radius: 5px;"/></div>
@@ -100,9 +112,12 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="account-settings">
-                                <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
-                                    <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
+                                <div class="user-profile" style="text-align: center;">
+                                    <% if(user.profileImage=="default.jpg"){ %>
+                                        <img src="/assets/userImgs/default.jpg" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                      <% } else{ %>  
+                                        <img src="/assets/userImgs/<%- user.id %><%- user.profileImage %>" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                     <% } %>                                    <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>
                                 <div class="about">
@@ -155,8 +170,12 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <div class="account-settings">
-                                <div class="user-profile">
-                                    <div class="user-avatar"><img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png" alt="Maxwell Admin" /></div>
+                                <div class="user-profile" style="text-align: center;">
+                                    <% if(user.profileImage=="default.jpg"){ %>
+                                        <img src="/assets/userImgs/default.jpg" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                      <% } else{ %>  
+                                        <img src="/assets/userImgs/<%- user.id %><%- user.profileImage %>" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                                     <% } %>
                                     <h5 class="user-name"><%- user.firstName %>  <%- user.lastName %></h5>
                                     <h6 class="user-email"><%- user.email %> </h6>
                                 </div>

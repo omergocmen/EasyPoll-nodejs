@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/assets/css/calendar.css">
     <link rel="stylesheet" href="/assets/css/step.css">
     <link rel="stylesheet" href="/assets/css/Login-Form-Dark.css">
-    
+
 
 </head>
 <body>
@@ -49,6 +49,8 @@
     }
     </script>
     
+
+
     <script>
         const mch=document.querySelector(".mch");
         const mchb=document.querySelector(".mchb");
@@ -85,6 +87,26 @@
             $('#sDate1').text($('#datepicker').data('date'));
             $('#datepicker').datepicker('hide');
         });
+
+
+       
+        function todayy()
+        {
+            const days=document.querySelectorAll(".day");
+            days.forEach(element => {
+
+            if(element.textContent==new Date(Date.now()).getDate())
+            {
+                element.style.backgroundColor="lightblue";
+            }
+            if(element.textContent==new Date(Date.now()).getDate()+1)
+            {
+                element.style.backgroundColor="lightgray";
+            }
+            });
+        }
+   
+
 
 
         
@@ -235,7 +257,7 @@ function myFunction()
             paylasButon.addEventListener("click", async () =>{
 
                 var dosya = document.getElementById('url-box').files;
-                console.log(dosya[0]); //mevcut dosya
+                //console.log(dosya[0]); mevcut dosya
 
                 if (navigator.canShare) {
 

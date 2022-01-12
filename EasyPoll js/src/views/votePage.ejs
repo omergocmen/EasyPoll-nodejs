@@ -1,9 +1,9 @@
 <%- include('./partials/navbar.ejs') %>
 
 
-    <div class="dateSection shadow" style="width:100%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
+    <div class="dateSection shadow" style="width:90%;max-width:1024px; height:auto;min-height:500px;margin:auto;margin-top: 150px;margin-bottom: 70px;">
         <br>
-        <div class="mdl-card mdl-shadow--2dp" style="width:100%;max-width:1024px;margin:auto;">
+        <div class="mdl-card mdl-shadow--2dp" style="width:80%;max-width:1024px;margin:auto;">
             <div class="mdl-card__supporting-text">
                 <div class="mdl-stepper-horizontal-alternative">
                     <div class="mdl-stepper-step active">
@@ -416,18 +416,18 @@
     <% comments.forEach(element => { %>
       <% index=index+1 %> 
       
-      <div class="card text-white bg-secondary mb-3" style="width: 100%;">
+      <div class="card text-white bg-secondary mb-3" style="width: 100%; border-radius: 10px; background-color:rgb(236, 236, 241) !important; color: black !important;">
         <div class="card-header"><%- element.ownerName %>  <a style="float: right;" class="btn btn-danger" href="http://localhost:3000/home/createPoll/deleteMessage/<%- element._id %>">X</a>                    </div>
         <div class="card-body">
           <h5 class="card-title"><%- element.text %></h5>
-          <p class="card-text"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>            
-          
+          <p class="card-text" style="font-size: 13px;"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>            
+          <hr>
           <% element.replies.forEach(e => { %>
-            <div class="repliess" style="width: 75%; float: right; background-color:lightgreen; color: black; border-bottom: 2px solid black;">
+            <div class="repliess mb-3" style="width: 75%; float: right; background-color:rgb(255, 255, 255); color: black; border: 1px solid #b1b1b1; border-radius: 10px;">
               <div class="card-header"><%- e.ownerName %> </div>
               <div class="card-body">
                 <h5 class="card-title"><%- e.text %></h5>
-                <p class="card-text"><%- e.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>
+                <p class="card-text" style="font-size: 13px;"><%- e.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>
               </div>
             </div>
             <% }) %>

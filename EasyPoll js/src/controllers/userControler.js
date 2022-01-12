@@ -380,14 +380,21 @@ module.exports.getPolls=async function(req,res,next)
     if(req.query.search!="" && req.query.search!=undefined)
     {
         let value=req.query.search;
+        // const count=await Poll.find({
+        //     $or: [
+        //     { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
+        //     { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
+        //     { description: { $regex: '.*' + value + '.*' , $options: 'i' } }
+        //   ]
+        // });
         const count=await Poll.find({
-            $or: [
-            { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
+            $and: [
+            { $or: [{ title: { $regex: '.*' + value + '.*' , $options: 'i' }},
             { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { description: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { ownerId: req.tokenUi }
-          ]
-        });
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }] },
+            {ownerId:req.tokenUi}
+        ]
+    })
         const index=Math.ceil(count.length/15);
         const pageOptions = {
             page: parseInt(req.query.page) || 0,
@@ -397,13 +404,13 @@ module.exports.getPolls=async function(req,res,next)
             url:"users/polls"
         }
         Poll.find({
-            $or: [
-            { title: { $regex: '.*' + value + '.*' , $options: 'i' }},
+            $and: [
+            { $or: [{ title: { $regex: '.*' + value + '.*' , $options: 'i' }},
             { isActive: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { description: { $regex: '.*' + value + '.*' , $options: 'i' } },
-            { ownerId: req.tokenUi }
-             ]
-            })
+            { description: { $regex: '.*' + value + '.*' , $options: 'i' } }] },
+            {ownerId:req.tokenUi}
+        ]
+    })
             .sort({'createdAt':-1})
             .skip(pageOptions.page * pageOptions.limit)
             .limit(pageOptions.limit)
@@ -449,4 +456,20 @@ module.exports.getDeleteProfileImage=async function(req,res,next)
     await user.save();
     req.flash('info','success:Profil resmi başarıyla kaldırıldı');
     res.redirect("http://localhost:3000/home/users/profile");
+}
+
+
+module.exports.getBlockUser=async function(req,res,next)
+{
+    const user =await User.findById(req.params.id);
+    if(user.blocked==true)
+    {
+        user.blocked=false;
+        await user.save();
+    }
+    else{
+        user.blocked=true;
+        await user.save();
+    }
+    res.redirect("http://localhost:3000/home/users");
 }

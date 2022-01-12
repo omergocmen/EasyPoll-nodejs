@@ -7,7 +7,14 @@
                 </div>
                 <div class="row people" style="justify-content: space-between;">
                     <% users.forEach(user => { %>
-                        <div class="shadow col-md-6 col-lg-3 item " style="margin: 10px;"><img class="rounded-circle" src="https://source.unsplash.com/random/400x400" />
+                        <div class="shadow col-md-6 col-lg-3 item " style="margin: 10px;">
+
+                            <% if(user.profileImage=="default.jpg"){ %>
+                                <img src="/assets/userImgs/default.jpg" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                              <% } else{ %>  
+                                <img src="/assets/userImgs/<%- user.id %><%- user.profileImage %>" class="img-thumbnail" style="width: 150px; height: auto;" alt="">
+                             <% } %>   
+
                             <h3 class="name"><a href=" http://localhost:3000/home/users/<%- user._id %>" style="text-decoration: none;"><%- user.firstName %>  <%- user.lastName %></a></h3>
                             <p class="title"><%- user.email %></p>
                             <p class="description"><%- user.biography %> </p>

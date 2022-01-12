@@ -36,6 +36,9 @@ router.post('/forgetPassword',userController.postForgetPassword);
 
 router.get("/admin",adminControl,userController.getAllUsers);
 
+
+router.get('/block/:id',adminControl,userController.getBlockUser);
+
 router.get('/',adminControl,userController.getAllUsers);
 router.get('/:id',adminControl,userController.getUser);
 

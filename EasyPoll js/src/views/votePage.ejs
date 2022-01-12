@@ -423,7 +423,7 @@
           <p class="card-text"><%- element.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>            
           
           <% element.replies.forEach(e => { %>
-            <div class="repliess" style="width: 75%; float: right;">
+            <div class="repliess" style="width: 75%; float: right; background-color:lightgreen; color: black; border-bottom: 2px solid black;">
               <div class="card-header"><%- e.ownerName %> </div>
               <div class="card-body">
                 <h5 class="card-title"><%- e.text %></h5>

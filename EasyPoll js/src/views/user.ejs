@@ -9,22 +9,32 @@
                     <p class="text-center"><a href="#" style="text-decoration: none;"><%- user.email %> </a><span class="date"><%- user.createdAt %>  </span></p>
                 </div>
                 <div class="text">
-                    <figure class="figure d-block"><img class="figure-img" style="border-radius: 100%;" src="https://source.unsplash.com/random/600x400">
-                        <figcaption class="figure-caption">Altyazı</figcaption>
+                    <figure class="figure d-block" style="text-align: center;">
+
+                        <% if(user.profileImage=="default.jpg"){ %>
+                            <img src="/assets/userImgs/default.jpg" class="img-thumbnail" style="width: 300px; height: auto; border-radius: 100%;"  alt="">
+                          <% } else{ %>  
+                            <img src="/assets/userImgs/<%- user.id %><%- user.profileImage %>" class="img-thumbnail" style="width: 300px; height: auto;" alt="">
+                         <% } %>   
+
                     </figure>
-                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-                    <ul> 
-                        <h4>Öne çıkan makaleler</h4>
-                        <li>
-                            Kompozit Malzemeler
-                        </li>
-                        <li>
-                            Binary Search
-                        </li>
-                        <li>
-                            Covid-19 ve Deri
-                        </li>
-                    </ul>
+                    <div class="prop" style="text-align: center;">
+                        <h1><%- user.firstName %> <%- user.lastName %>  </h1>
+                        <h3><%- user.email %> </h3>
+                        <h3><%- user.description %> </h3>
+                        <h3><%- user.createdAt %> </h3>
+                        <h3><%- user.business %> </h3>
+                        <h3><% if (user.isActive) { %>
+                         <h4>Aktif</h4>
+                        <% } %></h3>
+                        <h3>Toplam anket <%- user.totelPoll %> </h3>
+                        <% if(user.blocked==true){ %>
+                            <a class="btn btn-success" href="http://localhost:3000/home/users/block/<%- user.id %>">Blok Kaldır</a>
+                          <% } else{ %>  
+                            <a class="btn btn-danger" href="http://localhost:3000/home/users/block/<%- user.id %>">Kullanıcı Blokla</a>
+                         <% } %>
+                    </div>
+ 
                     <hr style="margin-bottom: 100px;">
                 </div>
             </div>

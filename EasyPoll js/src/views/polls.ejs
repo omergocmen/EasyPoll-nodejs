@@ -33,6 +33,11 @@
             <% let index=1 %> 
             <% polls.forEach(element => { %>
                     <tr>
+                      <%let dead=new Date(Date.now()).toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric'}) <= element.endTime  %>
+                      <% if (!dead) { %>
+                          <% element.isActive="Anketin Süresi Doldu." %>
+                          <% element.save() %>  
+                      <% } %>
                         <th scope="col"><%- index %> </th>
                         <th scope="col"><a href=<%- element.activeLink %>  style="text-decoration: none;"><%- element.title %></a></th>
                         <th scope="col"><%- element.description %> </th>

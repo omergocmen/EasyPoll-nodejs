@@ -42,13 +42,14 @@
                                 </div>
                                 <div class="about">
                                     <h5>Hakkında</h5>
+
                                     <p><%- user.business %></p>
                                     <p><%- user.biography %></p>
-                                    <p>Katılım Tarihi <%- user.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %>.</p>
+                                    <p>Katılım Tarihi <%- user.createdAt.toLocaleDateString("tr", { day: 'numeric', month: 'numeric', year: 'numeric', weekday: 'long' }) %></p>
                                     <% if(user.totelPoll==0){ %>
-                                        <p>Henüz hiç anket oluşturmadı.</p>
+                                        <p>Henüz Hiç Anket Oluşturmadı</p>
                                       <% } else{ %>  
-                                        <p>Toplam <%- user.totelPoll %>  anket oluşturdu.</p>
+                                        <p>Toplam <%- user.totelPoll %>  Anket Oluşturdu</p>
                                      <% } %>
                                     
                                 </div>

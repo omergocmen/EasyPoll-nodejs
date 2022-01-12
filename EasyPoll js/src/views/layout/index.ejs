@@ -52,6 +52,7 @@
     
     
     <script>
+       
         let dateToday = new Date();
         $('.date').datepicker({
             multidate: false,
@@ -60,6 +61,7 @@
         }).on('changeDate', function(ev){
             $('#sDate1').text($('#datepicker').data('date'));
             $('#datepicker').datepicker('hide');
+
         });
 
 

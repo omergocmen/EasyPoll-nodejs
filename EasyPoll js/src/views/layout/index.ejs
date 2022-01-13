@@ -64,11 +64,11 @@
     </script>
     
     <script>
-       
-        let dateToday = new Date();
+  
         $('.date').datepicker({
             multidate: false,
-            startDate: '-0m'
+            startDate: '-0m',
+            todayHighlight:true
             //endDate: '+2d'
         }).on('changeDate', function(ev){
             $('#sDate1').text($('#datepicker').data('date'));
@@ -82,33 +82,12 @@
             multidate: false,
             startDate: '-0m',
             format: 'dd.mm.yyyy',
+            todayHighlight:true
             //endDate: '+2d'
         }).on('changeDate', function(ev){
             $('#sDate1').text($('#datepicker').data('date'));
             $('#datepicker').datepicker('hide');
         });
-
-
-       
-        function todayy()
-        {
-            const days=document.querySelectorAll(".day");
-            days.forEach(element => {
-
-            if(element.textContent==new Date(Date.now()).getDate())
-            {
-                element.style.backgroundColor="lightblue";
-            }
-            if(element.textContent==new Date(Date.now()).getDate()+1)
-            {
-                element.style.backgroundColor="lightgray";
-            }
-            });
-        }
-   
-
-
-
         
  const mybtn=document.querySelector(".mybtn");
  const myInput=document.querySelector(".date");

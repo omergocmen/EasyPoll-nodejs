@@ -13,6 +13,9 @@ const CommentSchema = new Schema({
     ownerName:{
         type:String
     },
+    ownerProfile:{
+        type:String
+    },
     text:{
         type:String
     },

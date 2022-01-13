@@ -17,6 +17,9 @@ const VoteSchema = new Schema({
         type : String,
         trim:true
     },
+    voterProfile:{
+        type:String
+    },
     pollId:{
         type:String
     },

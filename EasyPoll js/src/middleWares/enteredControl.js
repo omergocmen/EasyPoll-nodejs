@@ -10,6 +10,8 @@ const enteredControl=async (req,res,next)=>{
         req.flash('auth', 'enter');
         res.locals.auth=req.flash('auth')[0];
         res.locals.name=req.flash('name')[0];
+        req.flash("photo",user[0].id+""+user[0].profileImage);
+        res.locals.photo=req.flash('photo')[0];
         req.tokenUi=decodedToken.id
         next()
 

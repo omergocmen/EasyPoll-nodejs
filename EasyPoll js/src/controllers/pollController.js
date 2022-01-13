@@ -204,7 +204,8 @@ module.exports.postVotePage=async function(req,res,next)
                     pollId:req.params.id,
                     ownerId:req.tokenUi,
                     ownerName:user.firstName+" "+user.lastName,
-                    text:req.body.comment[index]
+                    text:req.body.comment[index],
+                    ownerProfile:user.id+""+user.profileImage
                     }
                 )
                 await comment.save();
@@ -226,7 +227,8 @@ module.exports.postVotePage=async function(req,res,next)
                 ownerId:req.tokenUi,
                 ownerName:user.firstName +" "+user.lastName,
                 text:req.body.comment[1],
-                createdAt:new Date(Date.now())
+                createdAt:new Date(Date.now()),
+                ownerProfile:user.id+""+user.profileImage
                 }          
             comment.replies.push(reply);
             comment.save();
@@ -285,7 +287,8 @@ module.exports.postVotePage=async function(req,res,next)
                     voterId:userr[0]._id,
                     dates:req.body.votes,
                     voterFirstName:userr[0].firstName,
-                    voterLastName:userr[0].lastName
+                    voterLastName:userr[0].lastName,
+                    voterProfile:userr[0].id+""+userr[0].profileImage
                 })
         
                 poll.totelVote=parseInt(poll.totelVote)+1;
@@ -313,7 +316,8 @@ module.exports.postVotePage=async function(req,res,next)
                 voterId:userr[0]._id,
                 dates:req.body.votes,
                 voterFirstName:userr[0].firstName,
-                voterLastName:userr[0].lastName
+                voterLastName:userr[0].lastName,
+                voterProfile:userr[0].id+""+userr[0].profileImage
             })
     
             poll.totelVote=parseInt(poll.totelVote)+1;

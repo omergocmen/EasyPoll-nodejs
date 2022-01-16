@@ -22,7 +22,7 @@ module.exports.getAllUsers=async function(req,res)
         url:"users"
     }
     User.find()
-        .sort({'createdAt':-1})
+        .sort({'createdAt':1})
         .skip(pageOptions.page * pageOptions.limit)
         .limit(pageOptions.limit)
         .exec(function (err, users) {

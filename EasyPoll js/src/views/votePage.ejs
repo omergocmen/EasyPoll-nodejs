@@ -12,13 +12,13 @@
                         <div class="mdl-stepper-bar-left"></div>
                         <div class="mdl-stepper-bar-right"></div>
                     </div>
-                    <div class="mdl-stepper-step active-step">
+                    <div class="mdl-stepper-step active">
                         <div class="mdl-stepper-circle"><span>2</span></div>
                         <div class="mdl-stepper-title">Anket Ayarları</div>
                         <div class="mdl-stepper-bar-left"></div>
                         <div class="mdl-stepper-bar-right"></div>
                     </div>
-                    <div class="mdl-stepper-step active-step">
+                    <div class="mdl-stepper-step active">
                         <div class="mdl-stepper-circle"><span>3</span></div>
                         <div class="mdl-stepper-title">Tarih-Saat Seçimi</div>
                         <div class="mdl-stepper-bar-left"></div>
@@ -289,7 +289,7 @@
                    <% } %>
 
 
-                    <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> <img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin:auto; border-radius: 100%; " alt=""> </td> 
+                    <td><img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin-right: 10px; border-radius: 100%; " alt=""><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %>  </td> 
                 </tr>
               <% }) %>
               <% if(poll.oneDate=="true"){ %>
@@ -349,7 +349,7 @@
                           <% } %>
                         <% }) %>
                         <th><button type="submit" style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" class="btn btn-success">Güncelle</button></th>
-                        <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> <img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin:auto; border-radius: 100%;" alt="">  </td> 
+                        <td><img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin-right: 10px; border-radius: 100%;" alt=""> <%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
                     </tr>
                     
                       <% } else{ %>  
@@ -363,7 +363,7 @@
                           <% } %>
                         <% }) %>
                         <th><button type="submit"  style="background-color:#FF7B01; border-color: #FF7B01; color:white;width: auto; min-width:100px;margin-left:3px" class="btn btn-success">Güncelle</button></th>
-                        <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> <img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin:auto; border-radius: 100%;" alt="">  </td> 
+                        <td><img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin-right:10px; border-radius: 100%;" alt=""> <%- voteElement.voterFirstName %> <%- voteElement.voterLastName %>  </td> 
                     </tr>
 
                      <% } %>
@@ -379,7 +379,7 @@
                      <% } %>
                   <% }) %>
                   <td style="text-align: center;"><a style="color: black;" href="http://localhost:3000/home/createPoll/updateVote/<%- voteElement.id %>"><i  class="fas fa-pencil-alt pencil"></i></a></td>
-                  <td><%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> <img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin:auto; border-radius: 100%;" alt=""> </td> 
+                  <td><img src="/assets/userImgs/<%- voteElement.voterProfile %>" style="width: 20px; margin-right: 10px; border-radius: 100%;" alt=""> <%- voteElement.voterFirstName %> <%- voteElement.voterLastName %> </td> 
               </tr>
                <% } %>
               <% }) %>

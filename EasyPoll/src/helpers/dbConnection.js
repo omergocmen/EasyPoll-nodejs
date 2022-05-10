@@ -2,7 +2,11 @@ const mongoose=require("mongoose");
 const express=require("express");
 const app=express();
 module.exports.connectDatabase=function(){
-const dbUrl="mongodb+srv://omer:qweasd@dersicin.q35yy.mongodb.net/EasyPoll?retryWrites=true&w=majority";
+
+const dbUrl="your mongoDb url";
+
+const {MONGO_URL}=process.env;
+console.log(MONGO_URL);
 
 mongoose.connect(dbUrl)
 .then(result=>{
